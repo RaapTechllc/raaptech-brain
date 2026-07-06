@@ -1,0 +1,34 @@
+# Gitignore for RaapTech Brain
+# No secrets, no binaries, no node_modules — this is a markdown knowledge bundle.
+
+# Secrets
+*.env
+*.env.*
+*secret*
+*credential*
+auth.json
+oauth_creds.json
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node (if any scripts use Node)
+node_modules/
+
+# Temp
+*.tmp
+*.log
