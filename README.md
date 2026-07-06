@@ -1,3 +1,11 @@
+---
+type: Concept
+title: RaapTech Brain README
+description: Consolidated OKF v0.1 knowledge bundle for RaapTech LLC. Any AI agent can traverse this without special tooling.
+tags: [raaptech, brain, okf, knowledge-bundle]
+timestamp: 2026-07-06T16:30:00Z
+---
+
 # RaapTech Brain
 
 Consolidated OKF v0.1 knowledge bundle for RaapTech LLC. Any AI agent can traverse this without special tooling.

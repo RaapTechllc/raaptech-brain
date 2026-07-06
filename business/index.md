@@ -1,11 +1,3 @@
----
-type: Reference
-title: Business Domain Index
-description: RaapTech business operations — morning ops, TOC analysis, revenue, onboarding, client work.
-tags: [business, operations, revenue, clients]
-timestamp: 2026-07-06T16:30:00Z
----
-
 # Business
 
 * [Morning Operations](/business/morning-ops.md) — Daily ops stack: Lab Pulse, Morning Brief, Super Brain

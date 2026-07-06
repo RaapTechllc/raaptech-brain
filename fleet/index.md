@@ -1,11 +1,3 @@
----
-type: Reference
-title: Fleet Domain Index
-description: RaapTech fleet topology — nodes, services, Tailscale map, monitoring, backups.
-tags: [fleet, topology, proxmox, tailscale]
-timestamp: 2026-07-06T16:30:00Z
----
-
 # Fleet
 
 * [Topology](/fleet/topology.md) — All nodes, IPs, roles, status

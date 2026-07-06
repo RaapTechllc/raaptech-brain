@@ -1,11 +1,3 @@
----
-type: Reference
-title: Architecture Domain Index
-description: RaapTech OS architecture — 27 ratified decisions, model routing, cost policy, DLP, MCP servers, kill switches.
-tags: [architecture, raaptech-os, decisions]
-timestamp: 2026-07-06T16:30:00Z
----
-
 # Architecture
 
 * [Architecture Decisions Map](/architecture/decisions-map.md) — Summary of all 27 ratified decisions with source links
