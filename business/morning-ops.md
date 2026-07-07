@@ -30,7 +30,7 @@ timestamp: 2026-07-06T16:30:00Z
 
 ## Integration Points
 
-- All three tools feed into the Obsidian vault at `E:\openclaw\Openclaw`
+- All three tools feed into the Obsidian vault at `C:\Users\Kyle\.openclaw\workspace\RaapTech-Vault` (see [Obsidian Vault Bridge](/references/obsidian-vault.md))
 - Morning Brief HTML is the primary human-facing dashboard
 - Super Brain generates the daily master prompt for Hermes/Fable sessions
 

@@ -28,6 +28,7 @@ The single traversable knowledge layer that links all RaapTech repos, fleet node
 | `RaapTech_OS/` | Brain links to architecture decisions, model routing, config |
 | `fable5/` | Brain links to session catalog, sprint tracker; fable5 is the *operating* repo, brain is the *knowledge* layer |
 | `.openclaw/workspace/` | Brain links to AGENTS.md, fleet roster, Cole Medin extract |
+| `RaapTech-Vault/` (Obsidian) | Brain links via [Obsidian Vault Bridge](/references/obsidian-vault.md) — PARA workspace for projects, runbooks, daily notes |
 | `raaptech-rde/` | Brain links to deliverable engine (when cloned) |
 | `smw-cloud-main/` | Brain links to Agent Arcade, SMW ops |
 
@@ -43,6 +44,9 @@ python scripts/sync-google-drive.py --pull
 
 # Validate OKF conformance
 python scripts/okf-validate.py
+
+# Check local Obsidian vault + domain mapping
+python scripts/vault-bridge.py --report
 ```
 
 ## Structure
@@ -63,5 +67,5 @@ raaptech-brain/
 ├── skills/               # Cole Medin patterns, AGENTS.md conventions
 ├── integrations/         # Google OAuth, GitHub, TradingView, messaging
 ├── research/             # Archived research synthesis
-└── references/           # External specs, brain extracts
+└── references/           # Obsidian vault bridge, OKF spec, external extracts
 ```

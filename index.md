@@ -22,7 +22,7 @@ This is the single traversable knowledge bundle for RaapTech LLC. Start here, fo
 * [Skills & Standards](/skills/) — Cole Medin patterns, AGENTS.md conventions, build process, sub-agent rules
 * [Integrations](/integrations/) — Google OAuth bridge, GitHub, TradingView, messaging gateways
 * [Research](/research/) — Archived research synthesis, market data, paper trails
-* [References](/references/) — External specs (OKF, DESIGN.md), Cole Medin brain extract
+* [References](/references/) — Obsidian vault bridge, OKF spec, external extracts
 
 ## Quick nav
 
