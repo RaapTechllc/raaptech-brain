@@ -1,0 +1,82 @@
+[
+  {
+    "question": "What is the daily cost cap across all providers?",
+    "hit": true,
+    "file": "architecture/cost-policy.md#hard-cap",
+    "latency_ms": 4.2,
+    "evidence_tokens": 34,
+    "naive_tokens": 247
+  },
+  {
+    "question": "Which model serves as the orchestrator in model routing?",
+    "hit": true,
+    "file": "architecture/model-routing.md",
+    "latency_ms": 3.1,
+    "evidence_tokens": 339,
+    "naive_tokens": 410
+  },
+  {
+    "question": "What is the Tailscale IP for TrueNAS?",
+    "hit": true,
+    "file": "fleet/tailscale-map.md#ip-map",
+    "latency_ms": 2.7,
+    "evidence_tokens": 174,
+    "naive_tokens": 534
+  },
+  {
+    "question": "What is the disaster recovery order for the fleet?",
+    "hit": true,
+    "file": "fleet/backups.md#recovery-order",
+    "latency_ms": 2.8,
+    "evidence_tokens": 53,
+    "naive_tokens": 442
+  },
+  {
+    "question": "What runs first in the daily morning ops stack?",
+    "hit": true,
+    "file": "fleet/services.md#daily-ops-stack",
+    "latency_ms": 3.9,
+    "evidence_tokens": 95,
+    "naive_tokens": 432
+  },
+  {
+    "question": "How does contract-first spawning order the agents?",
+    "hit": true,
+    "file": "skills/cole-medin-patterns.md#5-contract-first-spawning",
+    "latency_ms": 3.3,
+    "evidence_tokens": 69,
+    "naive_tokens": 1047
+  },
+  {
+    "question": "Where does cron output go from a TUI session in the messaging gateways?",
+    "hit": true,
+    "file": "integrations/messaging-gateways.md#cron-delivery",
+    "latency_ms": 4.2,
+    "evidence_tokens": 140,
+    "naive_tokens": 396
+  },
+  {
+    "question": "Where are the Google OAuth credentials stored?",
+    "hit": true,
+    "file": "integrations/google-oauth-bridge.md",
+    "latency_ms": 3.0,
+    "evidence_tokens": 570,
+    "naive_tokens": 641
+  },
+  {
+    "question": "What is the next sprint session to run?",
+    "hit": true,
+    "file": "sessions/sprint-tracker.md#next-action",
+    "latency_ms": 4.6,
+    "evidence_tokens": 78,
+    "naive_tokens": 451
+  },
+  {
+    "question": "What is the rot period for API keys?",
+    "hit": true,
+    "file": "architecture/rot-maintenance.md#rot-rates",
+    "latency_ms": 4.0,
+    "evidence_tokens": 62,
+    "naive_tokens": 242
+  }
+]

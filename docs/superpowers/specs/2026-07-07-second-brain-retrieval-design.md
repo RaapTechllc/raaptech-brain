@@ -1,3 +1,11 @@
+---
+type: Specification
+title: Deterministic Retrieval System (Design)
+description: Approved design for the brain.py retrieval CLI, catalogue, benchmark, and dashboard.
+tags: [spec, retrieval, brain]
+timestamp: 2026-07-07T00:00:00Z
+---
+
 # RaapTech Brain — Deterministic Retrieval System (Design)
 
 Date: 2026-07-07 · Status: Approved by Kyle

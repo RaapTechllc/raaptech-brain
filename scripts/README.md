@@ -1,35 +1,75 @@
 ---
 type: Reference
 title: Scripts
-description: Maintenance and operational scripts for the brain repository.
-tags: [scripts, maintenance, validation, links]
+description: Operational scripts for the brain repository — retrieval CLI, validation, and sync bridges.
+tags: [scripts, retrieval, validation, sync, vault]
 timestamp: 2026-07-07T12:00:00Z
 ---
 
 # Scripts
 
-## validate-links.sh
+All scripts run from the repo root with `python scripts/<script>.py`. Only
+`sync-google-drive.py`, `okf-validate.py`, and `vault-bridge.py` need
+third-party packages (see `requirements.txt` at repo root); `brain.py` is
+stdlib-only.
 
-**Status:** Planned (referenced in architecture index)
+## brain.py
 
-Validates internal wiki-style links across all markdown files in the brain.
-Ensures no broken references after reorganization.
+Deterministic retrieval CLI over the brain's markdown knowledge base.
 
-**Location:** TBD — will be created at `C:\Users\Kyle\CC\raaptech-brain\scripts\validate-links.sh`
+```bash
+python scripts/brain.py ask "what is the cost policy?"   # Retrieve answers
+python scripts/brain.py save "note text"                 # Save new knowledge
+python scripts/brain.py reindex                          # Rebuild the index
+python scripts/brain.py bench                            # Run bench-questions.json benchmark
+python scripts/brain.py html                             # Render HTML dashboard
+```
 
-## Planned Scripts
+Stdlib-only — no pip install required.
 
-| Script | Purpose | Status |
-|---|---|---|
-| `validate-links.sh` | Check all internal links resolve | Planned |
-| `sync-from-vault.sh` | Pull latest vault notes as brain references | Planned |
-| `sync-from-fable5.sh` | Pull latest fable5 status/runs as brain summaries | Planned |
-| `generate-index.sh` | Auto-generate table-of-contents for each domain index | Planned |
+## okf-validate.py
 
-## Usage
+Validates OKF bundle conformance: YAML frontmatter, required fields, and
+bundle structure across all markdown files. Requires PyYAML.
 
-All scripts should:
-- Run from repo root: `bash scripts/<script>.sh`
-- Be bash-compatible (git-bash on Windows)
-- Report exit code 0 on success, non-zero on failure
-- Print validation errors with file paths and line numbers
+```bash
+python scripts/okf-validate.py
+```
+
+## sync-google-drive.py
+
+Push/pull knowledge documents between the brain and a `raaptech-brain`
+folder in Google Drive, using OAuth credentials at `~/.gemini/oauth_creds.json`.
+Requires the Google API client libraries.
+
+```bash
+python scripts/sync-google-drive.py --status   # Check auth status
+python scripts/sync-google-drive.py --list     # List files in Drive brain folder
+python scripts/sync-google-drive.py --pull     # Download from Drive → brain
+python scripts/sync-google-drive.py --push     # Upload brain → Drive
+```
+
+## vault-bridge.py
+
+Bridge to the local RaapTech-Vault Obsidian workspace: verifies vault
+accessibility, maps brain domains to vault PARA folders, and searches vault
+notes. Override the vault location with the `VAULT_PATH` env var. Requires
+PyYAML (frontmatter parsing).
+
+```bash
+python scripts/vault-bridge.py --status
+python scripts/vault-bridge.py --search <keyword>
+python scripts/vault-bridge.py --verify
+python scripts/vault-bridge.py --report
+```
+
+## bench-questions.json
+
+Benchmark question set consumed by `python scripts/brain.py bench` to score
+retrieval quality.
+
+## Conventions
+
+- Run from repo root: `python scripts/<script>.py`
+- Exit code 0 on success, non-zero on failure
+- Print errors with file paths where applicable

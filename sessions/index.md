@@ -1,11 +1,3 @@
----
-type: Index
-title: Sessions
-description: Fable 5 sprint queue, run ledger, session catalog, and quota tracking.
-tags: [sessions, fable5, sprint, ledger]
-timestamp: 2026-07-07T12:00:00Z
----
-
 # Sessions
 
 * [Sprint Tracker](/sessions/sprint-tracker.md) — Current sprint state, next action, all session statuses

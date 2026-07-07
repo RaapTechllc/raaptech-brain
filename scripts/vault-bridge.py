@@ -51,6 +51,10 @@ DOMAIN_MAP: dict[str, list[str]] = {
         "30-Resources/Market-Intel",
         "00-Inbox",
     ],
+    "references": [
+        "30-Resources/Tech-Reference",
+        "40-Archive",
+    ],
 }
 
 

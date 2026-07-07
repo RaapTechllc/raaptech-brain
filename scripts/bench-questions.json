@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is the daily cost cap across all providers?",
+    "expect": "$50/day"
+  },
+  {
+    "question": "Which model serves as the orchestrator in model routing?",
+    "expect": "GLM-5.2"
+  },
+  {
+    "question": "What is the Tailscale IP for TrueNAS?",
+    "expect": "100.72.235.14"
+  },
+  {
+    "question": "What is the disaster recovery order for the fleet?",
+    "expect": "Proxmox hypervisor"
+  },
+  {
+    "question": "What runs first in the daily morning ops stack?",
+    "expect": "Lab Pulse"
+  },
+  {
+    "question": "How does contract-first spawning order the agents?",
+    "expect": "Database agent runs FIRST"
+  },
+  {
+    "question": "Where does cron output go from a TUI session in the messaging gateways?",
+    "expect": "LOCAL-ONLY"
+  },
+  {
+    "question": "Where are the Google OAuth credentials stored?",
+    "expect": "oauth_creds.json"
+  },
+  {
+    "question": "What is the next sprint session to run?",
+    "expect": "Session 13"
+  },
+  {
+    "question": "What is the rot period for API keys?",
+    "expect": "30 days"
+  }
+]

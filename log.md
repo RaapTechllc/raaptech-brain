@@ -22,3 +22,4 @@
   * **Skills** (4): `agents-conventions.md` (roster + memory/blocker protocol), `build-process.md` (5-gate + 8-phase loop), `sub-agent-rules.md` (contract-first pattern), `anti-patterns.md` (known failure modes + recovery).
   * **Source material consulted**: `CC/fable5/{STATUS.md,README.md,research/,sessions/,runs/}`, `.openclaw/workspace/AGENTS.md`, `RaapTech_OS/docs/`, Hermes memory, past sessions.
   * **Result**: All domain index references now resolve. No dangling links to missing files.
+* **Memory**: brain save — references: Brain retrieval CLI -> references/memories.md#brain-retrieval-cli-2026-07-07

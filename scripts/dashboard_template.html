@@ -1,0 +1,336 @@
+<title>RaapTech Brain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#0b0e14; --panel:#10141d; --panel-2:#151a26; --line:#232a3a;
+    --ink:#ccd5e4; --ink-dim:#7d8aa3; --ink-faint:#4c5871;
+    --amber:#ffb454; --amber-dim:#8a6a3a;
+    --ok:#5fd39a; --ok-bg:#12271d; --miss:#f0716f; --miss-bg:#2b1717;
+    --mono:"Cascadia Code","JetBrains Mono","SF Mono",ui-monospace,Consolas,monospace;
+    --sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+    --r:6px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#f3f1ec; --panel:#ffffff; --panel-2:#f7f5f0; --line:#ddd8cd;
+      --ink:#2b3140; --ink-dim:#6b7386; --ink-faint:#9aa1b1;
+      --amber:#b3690e; --amber-dim:#c9a26a;
+      --ok:#1c7a4d; --ok-bg:#e2f2e9; --miss:#b03432; --miss-bg:#f7e3e2;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scrollbar-color:var(--line) var(--bg)}
+  body{
+    background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);
+    padding:0 clamp(16px,4vw,56px) 80px;
+  }
+  ::selection{background:var(--amber);color:var(--bg)}
+  a{color:var(--amber)}
+  .mono{font-family:var(--mono)}
+
+  /* ---------- header ---------- */
+  header{
+    display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    padding:26px 0 18px;border-bottom:1px solid var(--line);margin-bottom:34px;
+  }
+  .brand{font-family:var(--mono);font-size:clamp(19px,2.6vw,24px);font-weight:600;letter-spacing:.02em}
+  .brand .tick{color:var(--amber)}
+  .brand small{color:var(--ink-dim);font-weight:400;font-size:.6em;letter-spacing:.18em;text-transform:uppercase;margin-left:12px}
+  .stamp{font-family:var(--mono);font-size:12px;color:var(--ink-dim)}
+  .stamp::before{content:"● ";color:var(--ok);font-size:9px;vertical-align:2px}
+
+  /* ---------- section labels ---------- */
+  h2{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-dim);margin:44px 0 14px;
+  }
+  h2::before{content:"// ";color:var(--amber)}
+
+  /* ---------- search ---------- */
+  .searchwrap{position:relative}
+  .searchbox{
+    display:flex;align-items:center;gap:10px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--r);padding:13px 16px;
+    transition:border-color .15s;
+  }
+  .searchbox:focus-within{border-color:var(--amber)}
+  .searchbox .prompt{font-family:var(--mono);color:var(--amber);font-size:15px;user-select:none}
+  #q{
+    flex:1;background:none;border:0;outline:0;color:var(--ink);
+    font:15px var(--mono);caret-color:var(--amber);min-width:0;
+  }
+  #q::placeholder{color:var(--ink-faint)}
+  #count{font-family:var(--mono);font-size:11px;color:var(--ink-dim);white-space:nowrap}
+
+  #results{list-style:none;margin-top:10px}
+  #results li{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:11px 14px;margin-bottom:6px;cursor:pointer;
+  }
+  #results li:hover,#results li.sel{border-color:var(--amber-dim);background:var(--panel-2)}
+  #results li.sel{outline:1px solid var(--amber);outline-offset:-1px}
+  .r-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .r-path{font-family:var(--mono);font-size:13px;color:var(--amber);overflow-wrap:anywhere}
+  .r-domain{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-dim);border:1px solid var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap}
+  .r-desc{color:var(--ink-dim);font-size:13.5px;margin-top:3px}
+  .r-kw{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:4px;overflow-wrap:anywhere}
+  .r-cmd{
+    display:none;font-family:var(--mono);font-size:12.5px;color:var(--ok);
+    background:var(--bg);border:1px solid var(--line);border-radius:4px;
+    padding:8px 10px;margin-top:9px;overflow-x:auto;white-space:pre;
+  }
+  #results li.open .r-cmd{display:block}
+  .r-cmd .dollar{color:var(--ink-faint);user-select:none}
+  .r-anchor{display:none;font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:5px;overflow-wrap:anywhere}
+  #results li.open .r-anchor{display:block}
+  .copied{color:var(--ok);font-size:11px;font-family:var(--mono);margin-left:8px}
+  .empty{color:var(--ink-faint);font-family:var(--mono);font-size:13px;padding:16px 4px}
+
+  /* ---------- domain map ---------- */
+  #domains{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .dcard{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:14px 16px;cursor:pointer;transition:border-color .15s;
+  }
+  .dcard:hover{border-color:var(--amber-dim)}
+  .dcard .dn{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink);text-transform:lowercase}
+  .dcard .dc{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--amber);margin-top:4px}
+  .dcard .dc small{font-size:11px;color:var(--ink-faint);font-weight:400;margin-left:5px}
+
+  /* ---------- bench ---------- */
+  #bench-summary{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:16px;
+    font-family:var(--mono);font-size:12px;color:var(--ink-dim)}
+  #bench-summary b{color:var(--ink);font-size:18px;display:block;font-weight:600}
+  #bench-summary .sv b{color:var(--ok)}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:640px}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+  td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td.num{font-family:var(--mono);text-align:right;color:var(--ink-dim);white-space:nowrap}
+  td .file{font-family:var(--mono);font-size:12px;color:var(--ink-dim);overflow-wrap:anywhere}
+  .badge{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+    border-radius:3px;padding:2px 8px;white-space:nowrap}
+  .badge.hit{color:var(--ok);background:var(--ok-bg)}
+  .badge.miss{color:var(--miss);background:var(--miss-bg)}
+  .hidden{display:none}
+
+  footer{margin-top:56px;font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div class="brand"><span class="tick">▍</span>raaptech.brain<small>knowledge console</small></div>
+  <div class="stamp">generated <span id="gen-at"></span></div>
+</header>
+
+<h2>query the brain</h2>
+<div class="searchwrap">
+  <div class="searchbox">
+    <span class="prompt">❯</span>
+    <input id="q" type="search" placeholder="search paths, keywords, descriptions… (↑↓ navigate · enter expand · click copies ask command)" autofocus autocomplete="off" spellcheck="false">
+    <span id="count"></span>
+  </div>
+  <ul id="results"></ul>
+</div>
+
+<h2>domain map</h2>
+<div id="domains"></div>
+
+<section id="bench-panel" class="hidden">
+  <h2>bench — retrieval quality</h2>
+  <div id="bench-summary"></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th>question</th><th>result</th><th>file</th>
+        <th style="text-align:right">latency</th>
+        <th style="text-align:right">evidence tok</th>
+        <th style="text-align:right">naive tok</th>
+        <th style="text-align:right">saved</th>
+      </tr></thead>
+      <tbody id="bench-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>run <span class="mono">python scripts/brain.py ask "&lt;question&gt;"</span> to query with evidence-grade retrieval.</footer>
+
+<script type="application/json" id="catalog-data">__CATALOG_JSON__</script>
+<script type="application/json" id="bench-data">__BENCH_JSON__</script>
+<script>
+(function(){
+  "use strict";
+  var GENERATED_AT = "__GENERATED_AT__";
+
+  function parseJSON(id, fallback){
+    try{
+      var el = document.getElementById(id);
+      var v = JSON.parse(el.textContent);
+      return Array.isArray(v) ? v : fallback;
+    }catch(e){ return fallback; }
+  }
+  var CATALOG = parseJSON("catalog-data", []);
+  var BENCH   = parseJSON("bench-data", []);
+
+  var esc = function(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  };
+  var fmt = function(n){ return Number(n||0).toLocaleString(); };
+
+  // header timestamp — show raw ISO if unparseable
+  var d = new Date(GENERATED_AT);
+  document.getElementById("gen-at").textContent =
+    isNaN(d.getTime()) ? GENERATED_AT : d.toISOString().replace("T"," ").slice(0,19)+"Z";
+
+  /* ---------- search ---------- */
+  var q = document.getElementById("q"),
+      out = document.getElementById("results"),
+      count = document.getElementById("count"),
+      sel = -1, shown = [];
+
+  // precompute haystacks
+  CATALOG.forEach(function(e){
+    e._hay = [e.path, e.description, e.domain, (e.keywords||[]).join(" ")].join(" ").toLowerCase();
+  });
+
+  function score(entry, terms){
+    var s = 0;
+    for (var i=0;i<terms.length;i++){
+      var t = terms[i];
+      if (entry._hay.indexOf(t) === -1) return -1;   // every term must appear somewhere
+      if ((entry.path||"").toLowerCase().indexOf(t) !== -1) s += 3;
+      if ((entry.keywords||[]).some(function(k){ return String(k).toLowerCase().indexOf(t)!==-1; })) s += 2;
+      s += 1;
+    }
+    return s;
+  }
+
+  function render(){
+    var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!terms.length){
+      shown = CATALOG.slice(0, 8).map(function(e){ return {e:e}; });
+    } else {
+      shown = CATALOG.map(function(e){ return {e:e, s:score(e, terms)}; })
+                     .filter(function(r){ return r.s >= 0; })
+                     .sort(function(a,b){ return b.s - a.s; })
+                     .slice(0, 50);
+    }
+    sel = -1;
+    count.textContent = terms.length
+      ? shown.length + " / " + CATALOG.length
+      : CATALOG.length + " entries";
+    if (!shown.length){
+      out.innerHTML = '<li class="empty" style="cursor:default">no matches — try fewer or broader terms</li>';
+      return;
+    }
+    out.innerHTML = shown.map(function(r,i){
+      var e = r.e;
+      var cmd = 'python scripts/brain.py ask "' + String(e.description||"").replace(/"/g,'\\"') + '"';
+      return '<li data-i="'+i+'" tabindex="-1">'
+        + '<div class="r-top"><span class="r-path">'+esc(e.path)+'</span>'
+        + '<span class="r-domain">'+esc(e.domain)+'</span></div>'
+        + '<div class="r-desc">'+esc(e.description)+'</div>'
+        + '<div class="r-kw">'+esc((e.keywords||[]).join(" · "))+'</div>'
+        + '<div class="r-anchor">open: '+esc(e.path)+'#'+esc(e.anchor)+'</div>'
+        + '<div class="r-cmd"><span class="dollar">$ </span>'+esc(cmd)+'<span class="copied"></span></div>'
+        + '</li>';
+    }).join("");
+  }
+
+  function items(){ return out.querySelectorAll("li[data-i]"); }
+  function setSel(i){
+    var ls = items(); if (!ls.length) return;
+    sel = Math.max(0, Math.min(i, ls.length-1));
+    ls.forEach(function(li,j){ li.classList.toggle("sel", j===sel); });
+    ls[sel].scrollIntoView({block:"nearest"});
+  }
+  function activate(li, copy){
+    li.classList.toggle("open", true);
+    if (copy){
+      var e = shown[+li.dataset.i].e;
+      var cmd = 'python scripts/brain.py ask "' + String(e.description||"").replace(/"/g,'\\"') + '"';
+      var mark = li.querySelector(".copied");
+      var done = function(ok){ mark.textContent = ok ? "✓ copied" : ""; setTimeout(function(){ mark.textContent=""; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(cmd).then(function(){done(true);}, function(){done(false);});
+      } else { done(false); }
+    }
+  }
+
+  q.addEventListener("input", render);
+  q.addEventListener("keydown", function(ev){
+    if (ev.key === "ArrowDown"){ ev.preventDefault(); setSel(sel+1); }
+    else if (ev.key === "ArrowUp"){ ev.preventDefault(); setSel(sel-1); }
+    else if (ev.key === "Enter" && sel >= 0){ ev.preventDefault(); activate(items()[sel], false); }
+    else if (ev.key === "Escape"){ q.value=""; render(); }
+  });
+  out.addEventListener("click", function(ev){
+    var li = ev.target.closest("li[data-i]");
+    if (li) activate(li, true);
+  });
+
+  /* ---------- domain map ---------- */
+  var byDomain = {};
+  CATALOG.forEach(function(e){
+    var k = e.domain || "uncategorized";
+    byDomain[k] = (byDomain[k]||0) + 1;
+  });
+  var dwrap = document.getElementById("domains");
+  var keys = Object.keys(byDomain).sort(function(a,b){ return byDomain[b]-byDomain[a]; });
+  dwrap.innerHTML = keys.length
+    ? keys.map(function(k){
+        return '<div class="dcard" role="button" tabindex="0" data-d="'+esc(k)+'">'
+          + '<div class="dn">'+esc(k)+'</div>'
+          + '<div class="dc">'+byDomain[k]+'<small>entries</small></div></div>';
+      }).join("")
+    : '<div class="empty">catalog is empty</div>';
+  function domainFilter(el){
+    q.value = el.dataset.d; render(); q.focus();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  dwrap.addEventListener("click", function(ev){
+    var c = ev.target.closest(".dcard"); if (c) domainFilter(c);
+  });
+  dwrap.addEventListener("keydown", function(ev){
+    var c = ev.target.closest(".dcard");
+    if (c && (ev.key === "Enter" || ev.key === " ")){ ev.preventDefault(); domainFilter(c); }
+  });
+
+  /* ---------- bench ---------- */
+  if (BENCH.length){
+    document.getElementById("bench-panel").classList.remove("hidden");
+    var hits=0, ev=0, nv=0;
+    var rows = BENCH.map(function(b){
+      if (b.hit) hits++;
+      ev += Number(b.evidence_tokens)||0;
+      nv += Number(b.naive_tokens)||0;
+      var saved = (Number(b.naive_tokens)||0) - (Number(b.evidence_tokens)||0);
+      return '<tr>'
+        + '<td>'+esc(b.question)+'</td>'
+        + '<td><span class="badge '+(b.hit?'hit">HIT':'miss">MISS')+'</span></td>'
+        + '<td><span class="file">'+esc(b.file)+'</span></td>'
+        + '<td class="num">'+fmt(b.latency_ms)+' ms</td>'
+        + '<td class="num">'+fmt(b.evidence_tokens)+'</td>'
+        + '<td class="num">'+fmt(b.naive_tokens)+'</td>'
+        + '<td class="num">'+(saved>=0?'−':'+')+fmt(Math.abs(saved))+'</td>'
+        + '</tr>';
+    }).join("");
+    document.getElementById("bench-body").innerHTML = rows;
+    var pct = nv > 0 ? Math.round((1 - ev/nv) * 100) : 0;
+    document.getElementById("bench-summary").innerHTML =
+      '<div><b>'+hits+'/'+BENCH.length+'</b>hit rate</div>'
+      + '<div><b>'+fmt(ev)+'</b>evidence tokens</div>'
+      + '<div><b>'+fmt(nv)+'</b>naive tokens</div>'
+      + '<div class="sv"><b>'+pct+'%</b>tokens saved</div>';
+  }
+
+  render();
+})();
+</script>

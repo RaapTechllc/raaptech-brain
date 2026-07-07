@@ -1,0 +1,11 @@
+# Dependencies for raaptech-brain scripts.
+# Note: scripts/brain.py is stdlib-only and needs nothing from this file.
+
+# scripts/vault-bridge.py, scripts/okf-validate.py
+PyYAML
+
+# scripts/sync-google-drive.py
+google-api-python-client
+google-auth
+google-auth-oauthlib
+google-auth-httplib2

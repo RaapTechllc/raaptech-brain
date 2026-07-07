@@ -1,0 +1,417 @@
+<title>RaapTech Brain</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* ---------- tokens ---------- */
+  :root{
+    --bg:#0b0e14; --panel:#10141d; --panel-2:#151a26; --line:#232a3a;
+    --ink:#ccd5e4; --ink-dim:#7d8aa3; --ink-faint:#4c5871;
+    --amber:#ffb454; --amber-dim:#8a6a3a;
+    --ok:#5fd39a; --ok-bg:#12271d; --miss:#f0716f; --miss-bg:#2b1717;
+    --mono:"Cascadia Code","JetBrains Mono","SF Mono",ui-monospace,Consolas,monospace;
+    --sans:"Segoe UI Variable Text","Segoe UI",system-ui,-apple-system,sans-serif;
+    --r:6px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#f3f1ec; --panel:#ffffff; --panel-2:#f7f5f0; --line:#ddd8cd;
+      --ink:#2b3140; --ink-dim:#6b7386; --ink-faint:#9aa1b1;
+      --amber:#b3690e; --amber-dim:#c9a26a;
+      --ok:#1c7a4d; --ok-bg:#e2f2e9; --miss:#b03432; --miss-bg:#f7e3e2;
+    }
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scrollbar-color:var(--line) var(--bg)}
+  body{
+    background:var(--bg);color:var(--ink);font:15px/1.55 var(--sans);
+    padding:0 clamp(16px,4vw,56px) 80px;
+  }
+  ::selection{background:var(--amber);color:var(--bg)}
+  a{color:var(--amber)}
+  .mono{font-family:var(--mono)}
+
+  /* ---------- header ---------- */
+  header{
+    display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;
+    padding:26px 0 18px;border-bottom:1px solid var(--line);margin-bottom:34px;
+  }
+  .brand{font-family:var(--mono);font-size:clamp(19px,2.6vw,24px);font-weight:600;letter-spacing:.02em}
+  .brand .tick{color:var(--amber)}
+  .brand small{color:var(--ink-dim);font-weight:400;font-size:.6em;letter-spacing:.18em;text-transform:uppercase;margin-left:12px}
+  .stamp{font-family:var(--mono);font-size:12px;color:var(--ink-dim)}
+  .stamp::before{content:"● ";color:var(--ok);font-size:9px;vertical-align:2px}
+
+  /* ---------- section labels ---------- */
+  h2{
+    font-family:var(--mono);font-size:11px;font-weight:600;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--ink-dim);margin:44px 0 14px;
+  }
+  h2::before{content:"// ";color:var(--amber)}
+
+  /* ---------- search ---------- */
+  .searchwrap{position:relative}
+  .searchbox{
+    display:flex;align-items:center;gap:10px;background:var(--panel);
+    border:1px solid var(--line);border-radius:var(--r);padding:13px 16px;
+    transition:border-color .15s;
+  }
+  .searchbox:focus-within{border-color:var(--amber)}
+  .searchbox .prompt{font-family:var(--mono);color:var(--amber);font-size:15px;user-select:none}
+  #q{
+    flex:1;background:none;border:0;outline:0;color:var(--ink);
+    font:15px var(--mono);caret-color:var(--amber);min-width:0;
+  }
+  #q::placeholder{color:var(--ink-faint)}
+  #count{font-family:var(--mono);font-size:11px;color:var(--ink-dim);white-space:nowrap}
+
+  #results{list-style:none;margin-top:10px}
+  #results li{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:11px 14px;margin-bottom:6px;cursor:pointer;
+  }
+  #results li:hover,#results li.sel{border-color:var(--amber-dim);background:var(--panel-2)}
+  #results li.sel{outline:1px solid var(--amber);outline-offset:-1px}
+  .r-top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap}
+  .r-path{font-family:var(--mono);font-size:13px;color:var(--amber);overflow-wrap:anywhere}
+  .r-domain{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-dim);border:1px solid var(--line);border-radius:3px;padding:1px 7px;white-space:nowrap}
+  .r-desc{color:var(--ink-dim);font-size:13.5px;margin-top:3px}
+  .r-kw{font-family:var(--mono);font-size:11px;color:var(--ink-faint);margin-top:4px;overflow-wrap:anywhere}
+  .r-cmd{
+    display:none;font-family:var(--mono);font-size:12.5px;color:var(--ok);
+    background:var(--bg);border:1px solid var(--line);border-radius:4px;
+    padding:8px 10px;margin-top:9px;overflow-x:auto;white-space:pre;
+  }
+  #results li.open .r-cmd{display:block}
+  .r-cmd .dollar{color:var(--ink-faint);user-select:none}
+  .r-anchor{display:none;font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:5px;overflow-wrap:anywhere}
+  #results li.open .r-anchor{display:block}
+  .copied{color:var(--ok);font-size:11px;font-family:var(--mono);margin-left:8px}
+  .empty{color:var(--ink-faint);font-family:var(--mono);font-size:13px;padding:16px 4px}
+
+  /* ---------- domain map ---------- */
+  #domains{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+  .dcard{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    padding:14px 16px;cursor:pointer;transition:border-color .15s;
+  }
+  .dcard:hover{border-color:var(--amber-dim)}
+  .dcard .dn{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:var(--ink);text-transform:lowercase}
+  .dcard .dc{font-family:var(--mono);font-size:26px;font-weight:600;color:var(--amber);margin-top:4px}
+  .dcard .dc small{font-size:11px;color:var(--ink-faint);font-weight:400;margin-left:5px}
+
+  /* ---------- bench ---------- */
+  #bench-summary{display:flex;gap:26px;flex-wrap:wrap;margin-bottom:16px;
+    font-family:var(--mono);font-size:12px;color:var(--ink-dim)}
+  #bench-summary b{color:var(--ink);font-size:18px;display:block;font-weight:600}
+  #bench-summary .sv b{color:var(--ok)}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+  table{border-collapse:collapse;width:100%;font-size:13px;min-width:640px}
+  th{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--ink-dim);text-align:left;padding:10px 14px;border-bottom:1px solid var(--line)}
+  td{padding:9px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  tr:last-child td{border-bottom:0}
+  td.num{font-family:var(--mono);text-align:right;color:var(--ink-dim);white-space:nowrap}
+  td .file{font-family:var(--mono);font-size:12px;color:var(--ink-dim);overflow-wrap:anywhere}
+  .badge{font-family:var(--mono);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+    border-radius:3px;padding:2px 8px;white-space:nowrap}
+  .badge.hit{color:var(--ok);background:var(--ok-bg)}
+  .badge.miss{color:var(--miss);background:var(--miss-bg)}
+  .hidden{display:none}
+
+  footer{margin-top:56px;font-family:var(--mono);font-size:11px;color:var(--ink-faint)}
+  :focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+  @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+</style>
+
+<header>
+  <div class="brand"><span class="tick">▍</span>raaptech.brain<small>knowledge console</small></div>
+  <div class="stamp">generated <span id="gen-at"></span></div>
+</header>
+
+<h2>query the brain</h2>
+<div class="searchwrap">
+  <div class="searchbox">
+    <span class="prompt">❯</span>
+    <input id="q" type="search" placeholder="search paths, keywords, descriptions… (↑↓ navigate · enter expand · click copies ask command)" autofocus autocomplete="off" spellcheck="false">
+    <span id="count"></span>
+  </div>
+  <ul id="results"></ul>
+</div>
+
+<h2>domain map</h2>
+<div id="domains"></div>
+
+<section id="bench-panel" class="hidden">
+  <h2>bench — retrieval quality</h2>
+  <div id="bench-summary"></div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr>
+        <th>question</th><th>result</th><th>file</th>
+        <th style="text-align:right">latency</th>
+        <th style="text-align:right">evidence tok</th>
+        <th style="text-align:right">naive tok</th>
+        <th style="text-align:right">saved</th>
+      </tr></thead>
+      <tbody id="bench-body"></tbody>
+    </table>
+  </div>
+</section>
+
+<footer>run <span class="mono">python scripts/brain.py ask "&lt;question&gt;"</span> to query with evidence-grade retrieval.</footer>
+
+<script type="application/json" id="catalog-data">[{"path": "architecture/cost-policy.md", "anchor": "", "keywords": ["cost", "policy", "architecture", "budget", "audit", "raaptech", "os", "50"], "description": "RaapTech OS cost policy \u2014 $50/day hard cap, per-model pricing, audit scope.", "domain": "architecture"}, {"path": "architecture/cost-policy.md", "anchor": "hard-cap", "keywords": ["hard", "cap", "cost", "policy", "50", "day", "across", "providers"], "description": "$50/day across all providers.", "domain": "architecture"}, {"path": "architecture/cost-policy.md", "anchor": "per-model-pricing", "keywords": ["model", "pricing", "cost", "policy", "routing", "serves", "role"], "description": "See Model Routing for which model serves which role.", "domain": "architecture"}, {"path": "architecture/cost-policy.md", "anchor": "audit-scope", "keywords": ["audit", "scope", "cost", "policy", "mutating", "actions", "g", "sec"], "description": "Mutating actions only (G-SEC-01).", "domain": "architecture"}, {"path": "architecture/cost-policy.md", "anchor": "quota-conservation", "keywords": ["quota", "conservation", "cost", "policy", "6", "ollama", "crons", "paused"], "description": "All 6 Ollama crons paused as of 2026-06-30 (quota low).", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "", "keywords": ["architecture", "decisions", "map", "raaptech", "os", "summary", "27", "ratified"], "description": "Summary of all 27 ratified RaapTech OS architecture decisions with source links.", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "decision-groups", "keywords": ["decision", "groups", "architecture", "decisions", "map", "full", "27", "source"], "description": "Full 27/27 decisions: See source document.", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "g-arch-architecture--provider-4-decisions", "keywords": ["g", "arch", "architecture", "provider", "4", "decisions", "map"], "description": "G-ARCH: Architecture & Provider (4 decisions) \u2014 see Architecture Decisions Map.", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "g-sec-security-3-decisions", "keywords": ["g", "sec", "security", "3", "decisions", "architecture", "map"], "description": "G-SEC: Security (3 decisions) \u2014 see Architecture Decisions Map.", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "g-arch-continued-engine-design", "keywords": ["g", "arch", "continued", "engine", "design", "architecture", "decisions", "map"], "description": "G-ARCH (continued): Engine Design \u2014 see Architecture Decisions Map.", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "g-rot-rotation--maintenance", "keywords": ["g", "rot", "rotation", "maintenance", "architecture", "decisions", "map", "full"], "description": "Full 27/27 decisions: See source document.", "domain": "architecture"}, {"path": "architecture/decisions-map.md", "anchor": "implementation-status", "keywords": ["implementation", "status", "architecture", "decisions", "map", "pr", "3", "master"], "description": "PR #3: Master Engine merged (audit, cost, DLP, killswitch, rot primitives).", "domain": "architecture"}, {"path": "architecture/dlp-security.md", "anchor": "", "keywords": ["dlp", "security", "architecture", "kill", "switch", "data", "loss", "prevention"], "description": "Data loss prevention patterns, kill switches, per-client DLP configuration.", "domain": "architecture"}, {"path": "architecture/dlp-security.md", "anchor": "decisions", "keywords": ["decisions", "dlp", "security"], "description": "Decisions \u2014 see DLP & Security.", "domain": "architecture"}, {"path": "architecture/dlp-security.md", "anchor": "dlp-scanner", "keywords": ["dlp", "scanner", "security", "dlpscanner", "client", "scanning"], "description": "DLPScanner(client=...) for per-client scanning.", "domain": "architecture"}, {"path": "architecture/dlp-security.md", "anchor": "kill-switches", "keywords": ["kill", "switches", "dlp", "security", "mcp", "server", "switch", "config"], "description": "Per MCP server kill switch in config/mcp_servers.yaml.", "domain": "architecture"}, {"path": "architecture/mcp-servers.md", "anchor": "", "keywords": ["mcp", "servers", "architecture", "integration", "connected", "transport", "audit", "scope"], "description": "Connected MCP servers \u2014 transport, audit scope, kill switches.", "domain": "architecture"}, {"path": "architecture/mcp-servers.md", "anchor": "defaults", "keywords": ["defaults", "mcp", "servers"], "description": "Defaults \u2014 see MCP Servers.", "domain": "architecture"}, {"path": "architecture/mcp-servers.md", "anchor": "connected-servers", "keywords": ["connected", "servers", "mcp"], "description": "Connected Servers \u2014 see MCP Servers.", "domain": "architecture"}, {"path": "architecture/mcp-servers.md", "anchor": "rules", "keywords": ["rules", "mcp", "servers", "server", "independent", "kill", "switch", "g"], "description": "Each server has independent kill switch (G-SEC-03).", "domain": "architecture"}, {"path": "architecture/model-routing.md", "anchor": "", "keywords": ["model", "routing", "architecture", "models", "openrouter", "serves", "role", "raaptech"], "description": "Which model serves which role in RaapTech OS \u2014 orchestrator, executor, fallback chain.", "domain": "architecture"}, {"path": "architecture/model-routing.md", "anchor": "active-routing-post-pr-4", "keywords": ["active", "routing", "post", "pr", "4", "model"], "description": "Active Routing (Post PR #4) \u2014 see Model Routing.", "domain": "architecture"}, {"path": "architecture/model-routing.md", "anchor": "key-rules", "keywords": ["key", "rules", "model", "routing", "anthropic", "crons", "heartbeats"], "description": "No Anthropic on crons or heartbeats.", "domain": "architecture"}, {"path": "architecture/model-routing.md", "anchor": "moa-presets", "keywords": ["moa", "presets", "model", "routing"], "description": "MoA Presets \u2014 see Model Routing.", "domain": "architecture"}, {"path": "architecture/model-routing.md", "anchor": "cost-policy", "keywords": ["cost", "policy", "model", "routing"], "description": "See Cost Policy.", "domain": "architecture"}, {"path": "architecture/rot-maintenance.md", "anchor": "", "keywords": ["rot", "maintenance", "architecture", "credentials", "rates", "credential", "rotation", "schedule"], "description": "Rot rates, credential rotation schedule, config freshness policy.", "domain": "architecture"}, {"path": "architecture/rot-maintenance.md", "anchor": "rot-rates", "keywords": ["rot", "rates", "maintenance", "adopted", "mark", "kashef", "exactly", "g"], "description": "Adopted from Mark Kashef's rot rates exactly (G-ROT-01):.", "domain": "architecture"}, {"path": "architecture/rot-maintenance.md", "anchor": "credential-rotation", "keywords": ["credential", "rotation", "rot", "maintenance", "oauth", "tokens", "auto", "refresh"], "description": "OAuth tokens auto-refresh via provider SDKs.", "domain": "architecture"}, {"path": "architecture/rot-maintenance.md", "anchor": "config-freshness", "keywords": ["config", "freshness", "rot", "maintenance", "files", "stamped", "timestamp", "frontmatter"], "description": "Config files stamped with timestamp in frontmatter.", "domain": "architecture"}, {"path": "sessions/run-ledger.md", "anchor": "", "keywords": ["run", "ledger", "sessions", "fable5", "cost", "fable", "5", "usage"], "description": "Fable 5 usage ledger \u2014 cost, duration, worth-it verdicts, routing lessons.", "domain": "sessions"}, {"path": "sessions/run-ledger.md", "anchor": "runs", "keywords": ["runs", "run", "ledger"], "description": "Runs \u2014 see Run Ledger.", "domain": "sessions"}, {"path": "sessions/run-ledger.md", "anchor": "routing-lessons", "keywords": ["routing", "lessons", "run", "ledger", "dry", "prompt", "validation", "claude"], "description": "Dry-run prompt validation \u2192 Claude CLI, not Fable.", "domain": "sessions"}, {"path": "sessions/session-catalog.md", "anchor": "", "keywords": ["session", "catalog", "sessions", "fable5", "fable", "5", "prompts", "descriptions"], "description": "All Fable 5 session prompts with descriptions and target repos.", "domain": "sessions"}, {"path": "sessions/sprint-tracker.md", "anchor": "", "keywords": ["sprint", "tracker", "sessions", "current", "state", "fable", "5", "status"], "description": "Current state of all Fable 5 sessions \u2014 status, next action, blockers.", "domain": "sessions"}, {"path": "sessions/sprint-tracker.md", "anchor": "next-action", "keywords": ["next", "action", "sprint", "tracker", "implementation", "first", "fable", "reset"], "description": "Implementation-first while Fable reset is available:.", "domain": "sessions"}, {"path": "sessions/sprint-tracker.md", "anchor": "sprint-status-summary", "keywords": ["sprint", "status", "summary", "tracker"], "description": "Sprint Status Summary \u2014 see Sprint Tracker.", "domain": "sessions"}, {"path": "fleet/backups.md", "anchor": "", "keywords": ["backups", "disaster", "recovery", "fleet", "proxmox", "truenas", "docker", "vm"], "description": "Proxmox, TrueNAS, Docker VM backup strategy and schedules.", "domain": "fleet"}, {"path": "fleet/backups.md", "anchor": "architecture", "keywords": ["architecture", "backups", "disaster", "recovery"], "description": "Architecture \u2014 see Backups & Disaster Recovery.", "domain": "fleet"}, {"path": "fleet/backups.md", "anchor": "backup-targets", "keywords": ["backup", "targets", "backups", "disaster", "recovery"], "description": "Backup Targets \u2014 see Backups & Disaster Recovery.", "domain": "fleet"}, {"path": "fleet/backups.md", "anchor": "key-vms-backed-up", "keywords": ["key", "vms", "backed", "backups", "disaster", "recovery"], "description": "Key VMs Backed Up \u2014 see Backups & Disaster Recovery.", "domain": "fleet"}, {"path": "fleet/backups.md", "anchor": "recovery-order", "keywords": ["recovery", "order", "backups", "disaster", "proxmox", "hypervisor"], "description": "Proxmox hypervisor.", "domain": "fleet"}, {"path": "fleet/backups.md", "anchor": "notes", "keywords": ["notes", "backups", "disaster", "recovery", "truenas", "100", "72", "235"], "description": "TrueNAS at 100.72.235.14 (Tailscale) \u2014 SSH key: truenas_admin + key truenas_maxx.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "", "keywords": ["monitoring", "health", "checks", "fleet", "crons", "heartbeats", "service", "monitored"], "description": "How each service is monitored \u2014 crons, heartbeats, alerts, dashboards.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "dashboard-lab-pulse", "keywords": ["dashboard", "lab", "pulse", "monitoring", "health", "checks", "primary", "projects"], "description": "Primary: ~/projects/lab-pulse/run-pulse.bat \u2014 checks 7 DVM services + 7 TS hosts.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "hermes-cron-monitoring", "keywords": ["hermes", "cron", "monitoring", "health", "checks", "rule", "set", "model"], "description": "Rule: Every cron MUST set --model explicitly.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "health-check-matrix", "keywords": ["health", "check", "matrix", "monitoring", "checks"], "description": "Health Check Matrix \u2014 see Monitoring & Health Checks.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "proxmox-monitoring", "keywords": ["proxmox", "monitoring", "health", "checks", "web", "ui", "https", "10"], "description": "Web UI: https://10.0.0.20:8006 (LAN) or via Tailscale.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "alert-flow", "keywords": ["alert", "flow", "monitoring", "health", "checks"], "description": "Alert Flow \u2014 see Monitoring & Health Checks.", "domain": "fleet"}, {"path": "fleet/monitoring.md", "anchor": "daily-ops-stack", "keywords": ["daily", "ops", "stack", "monitoring", "health", "checks", "run", "pulse"], "description": "run-pulse.bat \u2014 Lab Pulse (service check).", "domain": "fleet"}, {"path": "fleet/services.md", "anchor": "", "keywords": ["fleet", "services", "ollama", "openclaw", "hermes", "runs", "across", "raaptech"], "description": "What runs where across the RaapTech fleet \u2014 Ollama, OpenClaw, Hermes, n8n, Postgres, TradingView.", "domain": "fleet"}, {"path": "fleet/services.md", "anchor": "core-services", "keywords": ["core", "services", "fleet"], "description": "Core Services \u2014 see Fleet Services.", "domain": "fleet"}, {"path": "fleet/services.md", "anchor": "daily-ops-stack", "keywords": ["daily", "ops", "stack", "fleet", "services"], "description": "Daily Ops Stack \u2014 see Fleet Services.", "domain": "fleet"}, {"path": "fleet/services.md", "anchor": "model-serving", "keywords": ["model", "serving", "fleet", "services"], "description": "Model Serving \u2014 see Fleet Services.", "domain": "fleet"}, {"path": "fleet/services.md", "anchor": "storage", "keywords": ["storage", "fleet", "services"], "description": "Storage \u2014 see Fleet Services.", "domain": "fleet"}, {"path": "fleet/tailscale-map.md", "anchor": "", "keywords": ["tailscale", "network", "map", "fleet", "ips", "topology", "hostnames", "roles"], "description": "All Tailscale IPs, hostnames, roles, and connectivity notes.", "domain": "fleet"}, {"path": "fleet/tailscale-map.md", "anchor": "ip-map", "keywords": ["ip", "map", "tailscale", "network"], "description": "IP Map \u2014 see Tailscale Network Map.", "domain": "fleet"}, {"path": "fleet/tailscale-map.md", "anchor": "connectivity-rules", "keywords": ["connectivity", "rules", "tailscale", "network", "map", "fix", "don", "work"], "description": "If Tailscale is down \u2192 fix Tailscale, don't work around with LAN IPs.", "domain": "fleet"}, {"path": "fleet/tailscale-map.md", "anchor": "fleet-agent--tailscale", "keywords": ["fleet", "agent", "tailscale", "network", "map"], "description": "Fleet Agent \u2194 Tailscale \u2014 see Tailscale Network Map.", "domain": "fleet"}, {"path": "fleet/tailscale-map.md", "anchor": "network-diagram", "keywords": ["network", "diagram", "tailscale", "map"], "description": "Network Diagram \u2014 see Tailscale Network Map.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "", "keywords": ["fleet", "topology", "proxmox", "nodes", "raaptech", "hardware", "roles", "tailscale"], "description": "All RaapTech fleet nodes \u2014 hardware, roles, Tailscale IPs, status.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "command-node", "keywords": ["command", "node", "fleet", "topology"], "description": "Command Node \u2014 see Fleet Topology.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "proxmox-host", "keywords": ["proxmox", "host", "fleet", "topology"], "description": "Proxmox Host \u2014 see Fleet Topology.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "fleet-agents-proxmox-vms", "keywords": ["fleet", "agents", "proxmox", "vms", "topology"], "description": "Fleet Agents (Proxmox VMs) \u2014 see Fleet Topology.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "containers", "keywords": ["containers", "fleet", "topology"], "description": "Containers \u2014 see Fleet Topology.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "key-rules", "keywords": ["key", "rules", "fleet", "topology", "lab", "access", "tailscale"], "description": "ALL lab access via Tailscale ONLY.", "domain": "fleet"}, {"path": "fleet/topology.md", "anchor": "pve-8-fixes-historical", "keywords": ["pve", "8", "fixes", "historical", "fleet", "topology", "nvidia", "uvm"], "description": "nvidia-uvm major 234\u2192511.", "domain": "fleet"}, {"path": "business/ai-trading-council.md", "anchor": "", "keywords": ["ai", "trading", "council", "business", "crypto", "modes", "allocation", "rules"], "description": "AI Trading Council modes, allocation rules, and strategy brief.", "domain": "business"}, {"path": "business/ai-trading-council.md", "anchor": "modes", "keywords": ["modes", "ai", "trading", "council"], "description": "Modes \u2014 see AI Trading Council.", "domain": "business"}, {"path": "business/ai-trading-council.md", "anchor": "rules-june-2026", "keywords": ["rules", "june", "2026", "ai", "trading", "council", "small", "gains"], "description": "Small gains: Take profits early, don't hold for moonshots.", "domain": "business"}, {"path": "business/ai-trading-council.md", "anchor": "platforms", "keywords": ["platforms", "ai", "trading", "council", "primary", "hl", "hyperliquid"], "description": "Primary: HL (HyperLiquid).", "domain": "business"}, {"path": "business/ai-trading-council.md", "anchor": "integration", "keywords": ["integration", "ai", "trading", "council", "tradingview", "mcp", "jackson"], "description": "TradingView MCP Jackson at ~/tradingview-mcp-jackson.", "domain": "business"}, {"path": "business/client-work.md", "anchor": "", "keywords": ["client", "work", "business", "clients", "smw", "sheet", "metal", "werks"], "description": "Active client engagements \u2014 Sheet Metal Werks, SMW Cloud, and pipeline.", "domain": "business"}, {"path": "business/client-work.md", "anchor": "primary-client-sheet-metal-werks-inc-smw", "keywords": ["primary", "client", "sheet", "metal", "werks", "inc", "smw", "work"], "description": "Main web platform (smw-cloud-main).", "domain": "business"}, {"path": "business/client-work.md", "anchor": "smw-cloud-components", "keywords": ["smw", "cloud", "components", "client", "work", "main", "web", "platform"], "description": "Main web platform (smw-cloud-main).", "domain": "business"}, {"path": "business/client-work.md", "anchor": "smw-sessions", "keywords": ["smw", "sessions", "client", "work", "session", "1", "ready", "ship"], "description": "Session 1: ready_to_ship summary path \u2014 done.", "domain": "business"}, {"path": "business/client-work.md", "anchor": "pipeline", "keywords": ["pipeline", "client", "work"], "description": "Pipeline \u2014 see Client Work.", "domain": "business"}, {"path": "business/client-work.md", "anchor": "client-rules", "keywords": ["client", "rules", "work", "smw", "deliverable", "goes", "github"], "description": "Every SMW deliverable goes through GitHub.", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "", "keywords": ["morning", "operations", "business", "daily", "ops", "stack", "lab", "pulse"], "description": "Daily ops stack \u2014 Lab Pulse, Morning Brief, Super Brain dashboard.", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "daily-stack-run-order", "keywords": ["daily", "stack", "run", "order", "morning", "operations", "command", "projects"], "description": "Command: ~/projects/lab-pulse/run-pulse.bat.", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "1-lab-pulse", "keywords": ["1", "lab", "pulse", "morning", "operations", "command", "projects", "run"], "description": "Command: ~/projects/lab-pulse/run-pulse.bat.", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "2-morning-brief", "keywords": ["2", "morning", "brief", "operations", "command", "projects", "ops", "run"], "description": "Command: ~/projects/morning-ops-brief/run-brief.bat.", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "3-super-brain", "keywords": ["3", "super", "brain", "morning", "operations", "command", "projects", "dashboard"], "description": "Command: ~/projects/super-brain-dashboard/run-brain.bat.", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "integration-points", "keywords": ["integration", "points", "morning", "operations", "three", "tools", "feed", "obsidian"], "description": "All three tools feed into the Obsidian vault at C:\\Users\\Kyle\\.openclaw\\workspace\\RaapTech-Vault (see Obsidian Vault Bridge).", "domain": "business"}, {"path": "business/morning-ops.md", "anchor": "cron-status", "keywords": ["cron", "status", "morning", "operations", "6", "ollama", "crons", "paused"], "description": "All 6 Ollama crons paused as of 2026-06-30 (quota conservation).", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "", "keywords": ["revenue", "pricing", "business", "services", "raaptech", "service", "model", "client"], "description": "RaapTech service model, pricing, client engagement structure.", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "business-model", "keywords": ["business", "model", "revenue", "pricing", "raaptech", "llc", "solo", "ai"], "description": "RaapTech LLC = solo AI/automation consultancy (Kyle Raap).", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "primary-revenue-sheet-metal-werks-inc-smw", "keywords": ["primary", "revenue", "sheet", "metal", "werks", "inc", "smw", "pricing"], "description": "Project/retainer mix.", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "secondary-revenue-pipeline", "keywords": ["secondary", "revenue", "pipeline", "pricing", "agent", "arcade", "skill", "marketplace"], "description": "Agent Arcade \u2014 Agent-skill marketplace MVP (prototype stage).", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "internal-cost-centers-not-revenue", "keywords": ["internal", "cost", "centers", "revenue", "pricing", "raaptech", "os", "operating"], "description": "RaapTech OS \u2014 Operating system for the consultancy itself.", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "pricing-principles", "keywords": ["pricing", "principles", "revenue", "convert", "project", "work", "retainer", "recurring"], "description": "Convert project work to retainer \u2192 recurring revenue without per-project attention overhead.", "domain": "business"}, {"path": "business/revenue-pricing.md", "anchor": "revenue-path-status", "keywords": ["revenue", "path", "status", "pricing"], "description": "Revenue Path Status \u2014 see Revenue & Pricing.", "domain": "business"}, {"path": "business/toc-analysis.md", "anchor": "", "keywords": ["theory", "constraints", "analysis", "business", "strategy", "toc", "bottleneck", "raaptech"], "description": "RaapTech bottleneck analysis \u2014 attention is the constraint, 5-step action plan.", "domain": "business"}, {"path": "business/toc-analysis.md", "anchor": "the-constraint", "keywords": ["constraint", "theory", "constraints", "analysis", "attention", "time", "revenue", "pipeline"], "description": "Attention \u2014 not time, not revenue, not pipeline.", "domain": "business"}, {"path": "business/toc-analysis.md", "anchor": "5-whys-root-cause", "keywords": ["5", "whys", "root", "cause", "theory", "constraints", "analysis", "side"], "description": "Side projects stall at 60% \u2192 Context switching costs eat delivery.", "domain": "business"}, {"path": "business/toc-analysis.md", "anchor": "constraint-chain", "keywords": ["constraint", "chain", "theory", "constraints", "analysis", "attention", "context", "switching"], "description": "Attention \u2192 Context switching \u2192 Delivery stalls \u2192 Revenue delayed \u2192 Cash flow depends on SMW retainer \u2192 Vulnerable to single-client concentration.", "domain": "business"}, {"path": "business/toc-analysis.md", "anchor": "action-plan", "keywords": ["action", "plan", "theory", "constraints", "analysis"], "description": "Action Plan \u2014 see Theory of Constraints Analysis.", "domain": "business"}, {"path": "business/toc-analysis.md", "anchor": "next-constraint-after-relief", "keywords": ["next", "constraint", "relief", "theory", "constraints", "analysis", "converting", "agent"], "description": "Converting Agent Arcade from prototype to revenue-generating product \u2014 requires shipping and selling, not building.", "domain": "business"}, {"path": "skills/agents-conventions.md", "anchor": "", "keywords": ["agent", "conventions", "roster", "skills", "agents", "fleet", "roles", "output"], "description": "Fleet agent roles, output styles, model assignments, and operating conventions.", "domain": "skills"}, {"path": "skills/agents-conventions.md", "anchor": "roster", "keywords": ["roster", "agent", "conventions"], "description": "Roster \u2014 see Agent Conventions & Roster.", "domain": "skills"}, {"path": "skills/agents-conventions.md", "anchor": "memory-protocol", "keywords": ["memory", "protocol", "agent", "conventions", "roster", "read", "soul", "md"], "description": "Read SOUL.md \u2014 who you are.", "domain": "skills"}, {"path": "skills/agents-conventions.md", "anchor": "blocker-hygiene-every-session", "keywords": ["blocker", "hygiene", "session", "agent", "conventions", "roster", "check", "blockers"], "description": "Check BLOCKERS for items older than 7 days.", "domain": "skills"}, {"path": "skills/agents-conventions.md", "anchor": "change-governance", "keywords": ["change", "governance", "agent", "conventions", "roster"], "description": "Change Governance \u2014 see Agent Conventions & Roster.", "domain": "skills"}, {"path": "skills/agents-conventions.md", "anchor": "output-style", "keywords": ["output", "style", "agent", "conventions", "roster", "write", "mental", "notes"], "description": "Write it down \u2014 \"mental notes\" don't survive sessions.", "domain": "skills"}, {"path": "skills/anti-patterns.md", "anchor": "", "keywords": ["anti", "patterns", "skills", "error", "recovery", "failures", "known", "failure"], "description": "Known failure modes, what NOT to do, and error recovery protocol.", "domain": "skills"}, {"path": "skills/anti-patterns.md", "anchor": "communication-anti-patterns", "keywords": ["communication", "anti", "patterns"], "description": "Communication Anti-Patterns \u2014 see Anti-Patterns.", "domain": "skills"}, {"path": "skills/anti-patterns.md", "anchor": "build-anti-patterns", "keywords": ["build", "anti", "patterns"], "description": "Build Anti-Patterns \u2014 see Anti-Patterns.", "domain": "skills"}, {"path": "skills/anti-patterns.md", "anchor": "sub-agent-anti-patterns", "keywords": ["sub", "agent", "anti", "patterns"], "description": "Sub-Agent Anti-Patterns \u2014 see Anti-Patterns.", "domain": "skills"}, {"path": "skills/anti-patterns.md", "anchor": "cost-anti-patterns", "keywords": ["cost", "anti", "patterns"], "description": "Cost Anti-Patterns \u2014 see Anti-Patterns.", "domain": "skills"}, {"path": "skills/anti-patterns.md", "anchor": "error-recovery-protocol", "keywords": ["error", "recovery", "protocol", "anti", "patterns", "read", "full"], "description": "Read the FULL error.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "", "keywords": ["build", "process", "skills", "gate", "standards", "gated", "feature", "request"], "description": "The gated build process every feature request must pass through. Stack \u2192 Scope \u2192 Audience \u2192 Overlap \u2192 Handoff.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "gate-every-build-request", "keywords": ["gate", "build", "request", "process", "goes", "5", "checks", "writing"], "description": "Every build request goes through 5 checks before writing code:.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "rule-standards-override-defaults", "keywords": ["rule", "standards", "override", "defaults", "build", "process", "check", "first"], "description": "Check standards/ FIRST.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "8-phase-build-loop-autonomous-builds", "keywords": ["8", "phase", "build", "loop", "autonomous", "builds", "process", "context"], "description": "Context \u2014 Read task brief, understand requirements.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "definition-of-done", "keywords": ["definition", "done", "build", "process", "marking", "task", "complete"], "description": "Before marking ANY task complete:.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "frontend-standards", "keywords": ["frontend", "standards", "build", "process", "library", "discipline", "ui", "lib"], "description": "Library discipline: If a UI lib exists in the project, USE IT.", "domain": "skills"}, {"path": "skills/build-process.md", "anchor": "fable-5-build-rules", "keywords": ["fable", "5", "build", "rules", "process", "fable5", "repo", "specifically"], "description": "In the fable5 repo specifically:.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "", "keywords": ["cole", "medin", "patterns", "skills", "agents", "highest", "signal", "content"], "description": "Highest-signal patterns from Cole Medin's content \u2014 progressive disclosure, PRD-first, contract-first spawning, system evolution.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "tier-1--directly-applicable", "keywords": ["tier", "1", "directly", "applicable", "cole", "medin", "patterns", "description"], "description": "Description loaded at all times (~50-100 words, 5% of context).", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "1-progressive-disclosure-skills", "keywords": ["1", "progressive", "disclosure", "skills", "cole", "medin", "patterns", "description"], "description": "Description loaded at all times (~50-100 words, 5% of context).", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "2-the-5-techniques-top-agentic-engineers", "keywords": ["2", "5", "techniques", "top", "agentic", "engineers", "cole", "medin"], "description": "PRD-First Development \u2014 comprehensive PRD as north star, not optional docs.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "3-agent-harness-architecture-24-hour-agent", "keywords": ["3", "agent", "harness", "architecture", "24", "hour", "cole", "medin"], "description": "54% test pass rate in 24 hours, 54 coding sessions.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "4-agent-teams-vs-sub-agents", "keywords": ["4", "agent", "teams", "vs", "sub", "agents", "cole", "medin"], "description": "4. Agent Teams vs Sub-Agents \u2014 see Cole Medin Patterns.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "5-contract-first-spawning", "keywords": ["5", "contract", "first", "spawning", "cole", "medin", "patterns", "don"], "description": "Don't launch all agents in parallel.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "6-harness-reliability-math", "keywords": ["6", "harness", "reliability", "math", "cole", "medin", "patterns", "single"], "description": "Single agent reliability: ~95%.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "7-second-brain-architecture-obsidian--claude-code", "keywords": ["7", "second", "brain", "architecture", "obsidian", "claude", "code", "cole"], "description": "Obsidian = canvas (markdown = LLM-native).", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "8-system-evolution-pattern", "keywords": ["8", "system", "evolution", "pattern", "cole", "medin", "patterns", "bug"], "description": "After every bug fix:.", "domain": "skills"}, {"path": "skills/cole-medin-patterns.md", "anchor": "mapping-to-raaptech", "keywords": ["mapping", "raaptech", "cole", "medin", "patterns"], "description": "Mapping to RaapTech \u2014 see Cole Medin Patterns.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "", "keywords": ["sub", "agent", "rules", "skills", "agents", "spawning", "delegation", "contracts"], "description": "How to spawn, constrain, and validate sub-agents \u2014 contract-first, fresh context, write-first.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "core-principles", "keywords": ["core", "principles", "sub", "agent", "rules", "write", "first", "research"], "description": "Write-first, research-second.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "contract-first-pattern", "keywords": ["contract", "first", "pattern", "sub", "agent", "rules", "prevents", "cascading"], "description": "Prevents cascading failures from missing dependencies.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "hermes-sub-agent-rules-delegate_task", "keywords": ["hermes", "sub", "agent", "rules", "delegate", "task", "leaf", "agents"], "description": "Leaf agents cannot call: delegate_task, clarify, send_message, execute_code.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "when-to-use-sub-agents-vs-direct", "keywords": ["sub", "agents", "vs", "direct", "agent", "rules"], "description": "When to Use Sub-Agents (vs Direct) \u2014 see Sub-Agent Rules.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "patterns-that-work", "keywords": ["patterns", "work", "sub", "agent", "rules", "research", "report", "subagent"], "description": "Research \u2192 Report: Subagent researches, returns structured summary.", "domain": "skills"}, {"path": "skills/sub-agent-rules.md", "anchor": "patterns-that-fail", "keywords": ["patterns", "fail", "sub", "agent", "rules", "subagent", "starts", "web"], "description": "Subagent starts with web search \u2192 timeouts, zero output.", "domain": "skills"}, {"path": "integrations/github-integration.md", "anchor": "", "keywords": ["github", "integration", "integrations", "git", "pr", "gh", "cli", "auth"], "description": "gh CLI auth status, repo map, PR workflow conventions.", "domain": "integrations"}, {"path": "integrations/github-integration.md", "anchor": "raaptech-repos", "keywords": ["raaptech", "repos", "github", "integration"], "description": "RaapTech Repos \u2014 see GitHub Integration.", "domain": "integrations"}, {"path": "integrations/github-integration.md", "anchor": "pr-workflow", "keywords": ["pr", "workflow", "github", "integration", "branch", "feature", "description", "fix"], "description": "Branch: feature/description or fix/description.", "domain": "integrations"}, {"path": "integrations/github-integration.md", "anchor": "git-rules-from-agentsmd", "keywords": ["git", "rules", "agents", "md", "github", "integration", "line", "code"], "description": "Every line of code MUST reach GitHub.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "", "keywords": ["google", "oauth", "bridge", "integrations", "sync", "credentials", "knowledge", "workspace"], "description": "How to use Google OAuth credentials for knowledge sync, Google Workspace, and cloud operations.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "scopes-available", "keywords": ["scopes", "available", "google", "oauth", "bridge"], "description": "Scopes Available \u2014 see Google OAuth Bridge.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "what-this-unlocks", "keywords": ["unlocks", "google", "oauth", "bridge", "cloud", "platform", "scope", "agents"], "description": "With cloud-platform scope, agents can:.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "usage-pattern", "keywords": ["usage", "pattern", "google", "oauth", "bridge"], "description": "Usage Pattern \u2014 see Google OAuth Bridge.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "python-recommended", "keywords": ["python", "recommended", "google", "oauth", "bridge"], "description": "Python (recommended) \u2014 see Google OAuth Bridge.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "hermes-cli", "keywords": ["hermes", "cli", "google", "oauth", "bridge"], "description": "Hermes CLI \u2014 see Google OAuth Bridge.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "sync-protocol", "keywords": ["sync", "protocol", "google", "oauth", "bridge", "agent", "reads", "concept"], "description": "Agent reads concept from brain.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "brain--google-drive-push", "keywords": ["brain", "google", "drive", "push", "oauth", "bridge", "agent", "reads"], "description": "Agent reads concept from brain.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "google-drive--brain-pull", "keywords": ["google", "drive", "brain", "pull", "oauth", "bridge", "agent", "lists"], "description": "Agent lists files in designated Drive folder.", "domain": "integrations"}, {"path": "integrations/google-oauth-bridge.md", "anchor": "security-rules", "keywords": ["security", "rules", "google", "oauth", "bridge", "never", "print", "access"], "description": "Never print the access token or refresh token.", "domain": "integrations"}, {"path": "integrations/messaging-gateways.md", "anchor": "", "keywords": ["messaging", "gateways", "integrations", "telegram", "discord", "hermes", "platform", "signal"], "description": "Hermes messaging platform integrations \u2014 Telegram, Discord, Signal, WhatsApp, and routing rules.", "domain": "integrations"}, {"path": "integrations/messaging-gateways.md", "anchor": "overview", "keywords": ["overview", "messaging", "gateways", "hermes", "connects", "platforms", "gateway", "system"], "description": "Hermes connects to messaging platforms via the gateway system.", "domain": "integrations"}, {"path": "integrations/messaging-gateways.md", "anchor": "active-platforms", "keywords": ["active", "platforms", "messaging", "gateways"], "description": "Active Platforms \u2014 see Messaging Gateways.", "domain": "integrations"}, {"path": "integrations/messaging-gateways.md", "anchor": "cron-delivery", "keywords": ["cron", "delivery", "messaging", "gateways", "jobs", "run", "user", "present"], "description": "Cron jobs run with no user present.", "domain": "integrations"}, {"path": "integrations/messaging-gateways.md", "anchor": "gateway-troubleshooting", "keywords": ["gateway", "troubleshooting", "messaging", "gateways", "common", "issues"], "description": "See messaging-gateway-troubleshooting for common issues:.", "domain": "integrations"}, {"path": "integrations/tradingview-mcp.md", "anchor": "", "keywords": ["tradingview", "mcp", "integration", "integrations", "trading", "jackson", "bridge", "cdp"], "description": "TradingView MCP Jackson bridge \u2014 CDP connection, Lorentzian indicators, morning brief.", "domain": "integrations"}, {"path": "integrations/tradingview-mcp.md", "anchor": "key-capabilities", "keywords": ["key", "capabilities", "tradingview", "mcp", "integration"], "description": "Key Capabilities \u2014 see TradingView MCP Integration.", "domain": "integrations"}, {"path": "integrations/tradingview-mcp.md", "anchor": "indicators", "keywords": ["indicators", "tradingview", "mcp", "integration", "lorentzian", "premium", "primary", "ai"], "description": "Lorentzian Premium \u2014 Primary AI Edge indicator.", "domain": "integrations"}, {"path": "integrations/tradingview-mcp.md", "anchor": "morning-brief-flow", "keywords": ["morning", "brief", "flow", "tradingview", "mcp", "integration", "tv", "launch"], "description": "mcp_tradingview_tv_launch \u2014 Start TV Desktop.", "domain": "integrations"}, {"path": "integrations/tradingview-mcp.md", "anchor": "integration-with-ai-trading-council", "keywords": ["integration", "ai", "trading", "council", "tradingview", "mcp", "strategy", "rules"], "description": "See AI Trading Council for strategy rules and allocation.", "domain": "integrations"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "", "keywords": ["fable", "5", "prompting", "patterns", "research", "fable5", "cost", "synthesis"], "description": "Synthesis of Fable 5 prompting best practices \u2014 habits, routing, loop engineering, cost lessons.", "domain": "research"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "the-6-habits", "keywords": ["6", "habits", "fable", "5", "prompting", "patterns", "give", "agents"], "description": "Give the why \u2014 agents perform better when they understand purpose and audience.", "domain": "research"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "when-to-use-fable", "keywords": ["fable", "5", "prompting", "patterns", "hard", "bounded", "outcomes", "generic"], "description": "Hard bounded outcomes (not generic \"make it better\").", "domain": "research"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "when-not-to-use-fable", "keywords": ["fable", "5", "prompting", "patterns", "lint", "fixes"], "description": "Lint fixes.", "domain": "research"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "loop-engineering-boxminingai--superbash-pattern", "keywords": ["loop", "engineering", "boxminingai", "superbash", "pattern", "fable", "5", "prompting"], "description": "Instead of prompt \u2192 hope \u2192 manual review:.", "domain": "research"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "costperformance-framing-asapguide--tech-with-tim", "keywords": ["cost", "performance", "framing", "asapguide", "tech", "tim", "fable", "5"], "description": "Fable outperformed Opus on complex UI/visual/code tasks.", "domain": "research"}, {"path": "research/fable5-prompting-patterns.md", "anchor": "research-backed-lessons", "keywords": ["research", "backed", "lessons", "fable", "5", "prompting", "patterns"], "description": "Research-Backed Lessons \u2014 see Fable 5 Prompting Patterns.", "domain": "research"}, {"path": "references/memories.md", "anchor": "", "keywords": ["references", "memories", "brain", "save", "durable", "facts", "saved", "domain"], "description": "Durable facts saved into the references domain via brain save.", "domain": "references"}, {"path": "references/memories.md", "anchor": "brain-retrieval-cli-2026-07-07", "keywords": ["brain", "retrieval", "cli", "2026", "07", "references", "memories", "bundle"], "description": "The brain bundle has a deterministic retrieval CLI at scripts/brain.py \u2014 use 'python scripts/brain.py ask' before opening files, 'brain save' to store durable ...", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "", "keywords": ["obsidian", "vault", "bridge", "knowledge", "layer", "para", "verification", "maps"], "description": "Maps raaptech-brain domains to the local RaapTech-Vault Obsidian workspace for capture, verification, and deeper context.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "open-the-vault-on-this-station", "keywords": ["open", "vault", "station", "obsidian", "bridge", "folder"], "description": "Open Obsidian \u2192 Open folder as vault.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "obsidian-recommended", "keywords": ["obsidian", "recommended", "vault", "bridge", "open", "folder"], "description": "Open Obsidian \u2192 Open folder as vault.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "explorer--terminal", "keywords": ["explorer", "terminal", "obsidian", "vault", "bridge"], "description": "Explorer / terminal \u2014 see Obsidian Vault Bridge.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "github-private", "keywords": ["github", "private", "obsidian", "vault", "bridge", "repo", "raaptechllc", "raaptech"], "description": "Repo: RaapTechllc/raaptech-vault.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "domain-mapping--brain--vault", "keywords": ["domain", "mapping", "brain", "vault", "obsidian", "bridge", "table", "building"], "description": "Use this table when building out brain structure or verifying that vault notes still align with brain concepts.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "key-vault-entry-points", "keywords": ["key", "vault", "entry", "points", "obsidian", "bridge"], "description": "Key vault entry points \u2014 see Obsidian Vault Bridge.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "verification-workflow", "keywords": ["verification", "workflow", "obsidian", "vault", "bridge", "run", "brain", "repo"], "description": "Run from the brain repo root:.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "when-to-add-to-brain-vs-vault", "keywords": ["add", "brain", "vs", "vault", "obsidian", "bridge"], "description": "When to add to brain vs vault \u2014 see Obsidian Vault Bridge.", "domain": "references"}, {"path": "references/obsidian-vault.md", "anchor": "stale-path-note", "keywords": ["stale", "path", "note", "obsidian", "vault", "bridge", "older", "docs"], "description": "Older docs referenced E:\\openclaw\\Openclaw.", "domain": "references"}]</script>
+<script type="application/json" id="bench-data">[
+  {
+    "question": "What is the daily cost cap across all providers?",
+    "hit": true,
+    "file": "architecture/cost-policy.md#hard-cap",
+    "latency_ms": 4.2,
+    "evidence_tokens": 34,
+    "naive_tokens": 247
+  },
+  {
+    "question": "Which model serves as the orchestrator in model routing?",
+    "hit": true,
+    "file": "architecture/model-routing.md",
+    "latency_ms": 3.1,
+    "evidence_tokens": 339,
+    "naive_tokens": 410
+  },
+  {
+    "question": "What is the Tailscale IP for TrueNAS?",
+    "hit": true,
+    "file": "fleet/tailscale-map.md#ip-map",
+    "latency_ms": 2.7,
+    "evidence_tokens": 174,
+    "naive_tokens": 534
+  },
+  {
+    "question": "What is the disaster recovery order for the fleet?",
+    "hit": true,
+    "file": "fleet/backups.md#recovery-order",
+    "latency_ms": 2.8,
+    "evidence_tokens": 53,
+    "naive_tokens": 442
+  },
+  {
+    "question": "What runs first in the daily morning ops stack?",
+    "hit": true,
+    "file": "fleet/services.md#daily-ops-stack",
+    "latency_ms": 3.9,
+    "evidence_tokens": 95,
+    "naive_tokens": 432
+  },
+  {
+    "question": "How does contract-first spawning order the agents?",
+    "hit": true,
+    "file": "skills/cole-medin-patterns.md#5-contract-first-spawning",
+    "latency_ms": 3.3,
+    "evidence_tokens": 69,
+    "naive_tokens": 1047
+  },
+  {
+    "question": "Where does cron output go from a TUI session in the messaging gateways?",
+    "hit": true,
+    "file": "integrations/messaging-gateways.md#cron-delivery",
+    "latency_ms": 4.2,
+    "evidence_tokens": 140,
+    "naive_tokens": 396
+  },
+  {
+    "question": "Where are the Google OAuth credentials stored?",
+    "hit": true,
+    "file": "integrations/google-oauth-bridge.md",
+    "latency_ms": 3.0,
+    "evidence_tokens": 570,
+    "naive_tokens": 641
+  },
+  {
+    "question": "What is the next sprint session to run?",
+    "hit": true,
+    "file": "sessions/sprint-tracker.md#next-action",
+    "latency_ms": 4.6,
+    "evidence_tokens": 78,
+    "naive_tokens": 451
+  },
+  {
+    "question": "What is the rot period for API keys?",
+    "hit": true,
+    "file": "architecture/rot-maintenance.md#rot-rates",
+    "latency_ms": 4.0,
+    "evidence_tokens": 62,
+    "naive_tokens": 242
+  }
+]</script>
+<script>
+(function(){
+  "use strict";
+  var GENERATED_AT = "2026-07-07T06:11:55+00:00";
+
+  function parseJSON(id, fallback){
+    try{
+      var el = document.getElementById(id);
+      var v = JSON.parse(el.textContent);
+      return Array.isArray(v) ? v : fallback;
+    }catch(e){ return fallback; }
+  }
+  var CATALOG = parseJSON("catalog-data", []);
+  var BENCH   = parseJSON("bench-data", []);
+
+  var esc = function(s){
+    return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];
+    });
+  };
+  var fmt = function(n){ return Number(n||0).toLocaleString(); };
+
+  // header timestamp — show raw ISO if unparseable
+  var d = new Date(GENERATED_AT);
+  document.getElementById("gen-at").textContent =
+    isNaN(d.getTime()) ? GENERATED_AT : d.toISOString().replace("T"," ").slice(0,19)+"Z";
+
+  /* ---------- search ---------- */
+  var q = document.getElementById("q"),
+      out = document.getElementById("results"),
+      count = document.getElementById("count"),
+      sel = -1, shown = [];
+
+  // precompute haystacks
+  CATALOG.forEach(function(e){
+    e._hay = [e.path, e.description, e.domain, (e.keywords||[]).join(" ")].join(" ").toLowerCase();
+  });
+
+  function score(entry, terms){
+    var s = 0;
+    for (var i=0;i<terms.length;i++){
+      var t = terms[i];
+      if (entry._hay.indexOf(t) === -1) return -1;   // every term must appear somewhere
+      if ((entry.path||"").toLowerCase().indexOf(t) !== -1) s += 3;
+      if ((entry.keywords||[]).some(function(k){ return String(k).toLowerCase().indexOf(t)!==-1; })) s += 2;
+      s += 1;
+    }
+    return s;
+  }
+
+  function render(){
+    var terms = q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    if (!terms.length){
+      shown = CATALOG.slice(0, 8).map(function(e){ return {e:e}; });
+    } else {
+      shown = CATALOG.map(function(e){ return {e:e, s:score(e, terms)}; })
+                     .filter(function(r){ return r.s >= 0; })
+                     .sort(function(a,b){ return b.s - a.s; })
+                     .slice(0, 50);
+    }
+    sel = -1;
+    count.textContent = terms.length
+      ? shown.length + " / " + CATALOG.length
+      : CATALOG.length + " entries";
+    if (!shown.length){
+      out.innerHTML = '<li class="empty" style="cursor:default">no matches — try fewer or broader terms</li>';
+      return;
+    }
+    out.innerHTML = shown.map(function(r,i){
+      var e = r.e;
+      var cmd = 'python scripts/brain.py ask "' + String(e.description||"").replace(/"/g,'\\"') + '"';
+      return '<li data-i="'+i+'" tabindex="-1">'
+        + '<div class="r-top"><span class="r-path">'+esc(e.path)+'</span>'
+        + '<span class="r-domain">'+esc(e.domain)+'</span></div>'
+        + '<div class="r-desc">'+esc(e.description)+'</div>'
+        + '<div class="r-kw">'+esc((e.keywords||[]).join(" · "))+'</div>'
+        + '<div class="r-anchor">open: '+esc(e.path)+'#'+esc(e.anchor)+'</div>'
+        + '<div class="r-cmd"><span class="dollar">$ </span>'+esc(cmd)+'<span class="copied"></span></div>'
+        + '</li>';
+    }).join("");
+  }
+
+  function items(){ return out.querySelectorAll("li[data-i]"); }
+  function setSel(i){
+    var ls = items(); if (!ls.length) return;
+    sel = Math.max(0, Math.min(i, ls.length-1));
+    ls.forEach(function(li,j){ li.classList.toggle("sel", j===sel); });
+    ls[sel].scrollIntoView({block:"nearest"});
+  }
+  function activate(li, copy){
+    li.classList.toggle("open", true);
+    if (copy){
+      var e = shown[+li.dataset.i].e;
+      var cmd = 'python scripts/brain.py ask "' + String(e.description||"").replace(/"/g,'\\"') + '"';
+      var mark = li.querySelector(".copied");
+      var done = function(ok){ mark.textContent = ok ? "✓ copied" : ""; setTimeout(function(){ mark.textContent=""; }, 1600); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(cmd).then(function(){done(true);}, function(){done(false);});
+      } else { done(false); }
+    }
+  }
+
+  q.addEventListener("input", render);
+  q.addEventListener("keydown", function(ev){
+    if (ev.key === "ArrowDown"){ ev.preventDefault(); setSel(sel+1); }
+    else if (ev.key === "ArrowUp"){ ev.preventDefault(); setSel(sel-1); }
+    else if (ev.key === "Enter" && sel >= 0){ ev.preventDefault(); activate(items()[sel], false); }
+    else if (ev.key === "Escape"){ q.value=""; render(); }
+  });
+  out.addEventListener("click", function(ev){
+    var li = ev.target.closest("li[data-i]");
+    if (li) activate(li, true);
+  });
+
+  /* ---------- domain map ---------- */
+  var byDomain = {};
+  CATALOG.forEach(function(e){
+    var k = e.domain || "uncategorized";
+    byDomain[k] = (byDomain[k]||0) + 1;
+  });
+  var dwrap = document.getElementById("domains");
+  var keys = Object.keys(byDomain).sort(function(a,b){ return byDomain[b]-byDomain[a]; });
+  dwrap.innerHTML = keys.length
+    ? keys.map(function(k){
+        return '<div class="dcard" role="button" tabindex="0" data-d="'+esc(k)+'">'
+          + '<div class="dn">'+esc(k)+'</div>'
+          + '<div class="dc">'+byDomain[k]+'<small>entries</small></div></div>';
+      }).join("")
+    : '<div class="empty">catalog is empty</div>';
+  function domainFilter(el){
+    q.value = el.dataset.d; render(); q.focus();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  dwrap.addEventListener("click", function(ev){
+    var c = ev.target.closest(".dcard"); if (c) domainFilter(c);
+  });
+  dwrap.addEventListener("keydown", function(ev){
+    var c = ev.target.closest(".dcard");
+    if (c && (ev.key === "Enter" || ev.key === " ")){ ev.preventDefault(); domainFilter(c); }
+  });
+
+  /* ---------- bench ---------- */
+  if (BENCH.length){
+    document.getElementById("bench-panel").classList.remove("hidden");
+    var hits=0, ev=0, nv=0;
+    var rows = BENCH.map(function(b){
+      if (b.hit) hits++;
+      ev += Number(b.evidence_tokens)||0;
+      nv += Number(b.naive_tokens)||0;
+      var saved = (Number(b.naive_tokens)||0) - (Number(b.evidence_tokens)||0);
+      return '<tr>'
+        + '<td>'+esc(b.question)+'</td>'
+        + '<td><span class="badge '+(b.hit?'hit">HIT':'miss">MISS')+'</span></td>'
+        + '<td><span class="file">'+esc(b.file)+'</span></td>'
+        + '<td class="num">'+fmt(b.latency_ms)+' ms</td>'
+        + '<td class="num">'+fmt(b.evidence_tokens)+'</td>'
+        + '<td class="num">'+fmt(b.naive_tokens)+'</td>'
+        + '<td class="num">'+(saved>=0?'−':'+')+fmt(Math.abs(saved))+'</td>'
+        + '</tr>';
+    }).join("");
+    document.getElementById("bench-body").innerHTML = rows;
+    var pct = nv > 0 ? Math.round((1 - ev/nv) * 100) : 0;
+    document.getElementById("bench-summary").innerHTML =
+      '<div><b>'+hits+'/'+BENCH.length+'</b>hit rate</div>'
+      + '<div><b>'+fmt(ev)+'</b>evidence tokens</div>'
+      + '<div><b>'+fmt(nv)+'</b>naive tokens</div>'
+      + '<div class="sv"><b>'+pct+'%</b>tokens saved</div>';
+  }
+
+  render();
+})();
+</script>
