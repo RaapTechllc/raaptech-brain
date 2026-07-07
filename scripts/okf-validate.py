@@ -68,6 +68,8 @@ def validate_bundle(strict: bool = False) -> tuple[list[str], list[str], list[st
 
     # Check 2: index.md files should NOT have frontmatter (per spec §6)
     for f in index_files:
+        if f.parent == BUNDLE_ROOT:
+            continue  # bundle-root index.md carries okf_version frontmatter
         fm = parse_frontmatter(f)
         if fm is not None:
             warnings.append(f"  INDEX HAS FRONTMATTER: {f.relative_to(BUNDLE_ROOT)} — spec §6 says index.md has no frontmatter (except bundle-root for okf_version)")

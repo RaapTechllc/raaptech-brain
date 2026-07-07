@@ -1,11 +1,3 @@
----
-type: Reference
-title: Research Index
-description: Research domain — synthesized findings, not raw dumps. Links to source repos.
-tags: [research, index, findings, synthesis]
-timestamp: 2026-07-07T12:00:00Z
----
-
 # Research Index
 
 Research here is the synthesized result. Original working research lives in dedicated repos:
