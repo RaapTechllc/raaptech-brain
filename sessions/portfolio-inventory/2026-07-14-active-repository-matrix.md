@@ -1,3 +1,11 @@
+---
+type: Reference
+title: Active Repository Matrix
+description: Decision matrix for RaapTechllc active repositories.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # RaapTech Active Repository Portfolio Matrix
 
 **Evidence date:** 2026-07-14  

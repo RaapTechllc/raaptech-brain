@@ -1,3 +1,11 @@
+---
+type: Reference
+title: RDE VM-First Pilot Receipt
+description: Evidence receipt for the RDE VM-first pilot.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # RDE VM-First Isolated Pilot Receipt
 
 **Decision:** PASS — isolated RDE fixture pilot completed and retired cleanly.  

@@ -1,7 +1,8 @@
 ---
 type: Reference
 title: AI Developer Workflows and Fable Prompting Patterns
-description: Fable 5 prompting practices reframed inside AI developer workflows: agents + deterministic code + human judgment.
+description: "Fable 5 prompting practices reframed inside AI developer workflows: agents + deterministic code + human judgment."
+
 resource: C:/Users/Kyle/CC/fable5/research/2026-07-02-last30days-fable5-synthesis.md
 superseded_concept: "Loop engineering is a verification-repair pattern, not the operating model."
 tags: [research, fable5, prompting, cost, patterns, ai-developer-workflows]

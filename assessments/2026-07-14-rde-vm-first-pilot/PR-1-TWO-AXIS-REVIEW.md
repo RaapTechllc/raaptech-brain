@@ -1,3 +1,11 @@
+---
+type: Reference
+title: RDE Pilot PR-1 Two-Axis Review
+description: Standards and spec review receipt for RDE VM-first pilot.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # PR #1 Two-Axis Review — RDE VM-First Contract
 
 **PR:** https://github.com/RaapTechllc/raaptech-rde/pull/1  

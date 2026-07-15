@@ -1,3 +1,12 @@
+---
+type: Reference
+title: 03 CONTROL PLANE OWNERSHIP MAP
+description: "Assessment note: 03-CONTROL-PLANE-OWNERSHIP-MAP."
+
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Control Plane Ownership Map
 
 **Date:** 2026-07-14  

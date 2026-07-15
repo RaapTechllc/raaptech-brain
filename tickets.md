@@ -1,3 +1,11 @@
+---
+type: Specification
+title: Mine Pass Tickets
+description: Tracer-bullet tickets for the mine-pass pipeline.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Tickets: Mine Pass
 
 On-demand Insight mining from Hermes (then vault) via Miners → Gate agent → parked Conflicts → Hermes audit. Spec: `docs/superpowers/specs/2026-07-09-mine-pass-design.md`. Glossary: `CONTEXT.md`. ADR: `docs/adr/0001-mine-pass-gate-and-audit.md`.
@@ -10,10 +18,12 @@ Work the **frontier**: any ticket whose blockers are all done. For this chain th
 
 **Blocked by:** None — can start immediately.
 
-- [ ] `docs/mine/` exists with README describing the staging contract (claim, source path, evidence, proposed domain, gate decision + reason)
-- [ ] Placeholder `candidates.md`, `conflicts.md`, and `pass-log.md` match that contract
-- [ ] Staging artifacts are gitignored; README remains tracked
-- [ ] `okf-validate` / existing brain bench still pass (or staging is correctly excluded)
+**Status:** Done (2026-07-15)
+
+- [x] `docs/mine/` exists with README describing the staging contract (claim, source path, evidence, proposed domain, gate decision + reason)
+- [x] Placeholder `candidates.md`, `conflicts.md`, and `pass-log.md` match that contract
+- [x] Staging artifacts are gitignored; README remains tracked
+- [x] `okf-validate` / existing brain bench still pass (or staging is correctly excluded)
 
 ## Hermes Miner (thin proof)
 

@@ -1,3 +1,12 @@
+---
+type: Reference
+title: 02 CODEX PROJECT FACTORY DEPLOYMENT READINESS
+description: "Assessment note: 02-CODEX-PROJECT-FACTORY-DEPLOYMENT-READINESS."
+
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Codex Project Factory — Deployment Readiness
 
 **Date:** 2026-07-14  

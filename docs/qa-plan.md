@@ -1,3 +1,11 @@
+---
+type: Specification
+title: QA Plan 2026-07-15
+description: Evidence-driven QA plan for the RaapTech Brain platform.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # QA Plan — RaapTech Brain (full platform) — 2026-07-15
 
 **Environment:** local CLI · branch `cursor/brain-next-steps-plan` · commit `5d89505` · workspace `C:\Users\Kyle\CC\raaptech-brain`

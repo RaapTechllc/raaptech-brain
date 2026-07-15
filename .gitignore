@@ -32,3 +32,9 @@ node_modules/
 # Temp
 *.tmp
 *.log
+
+# Mine-pass staging artifacts (README in docs/mine/ stays tracked)
+docs/mine/candidates.md
+docs/mine/conflicts.md
+docs/mine/pass-log.md
+docs/qa-evidence/

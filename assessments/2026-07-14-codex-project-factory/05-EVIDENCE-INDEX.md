@@ -1,3 +1,12 @@
+---
+type: Reference
+title: 05 EVIDENCE INDEX
+description: "Assessment note: 05-EVIDENCE-INDEX."
+
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Codex Project Factory — Evidence Index
 
 **Assessment timestamp:** 2026-07-14  

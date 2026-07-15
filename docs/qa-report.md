@@ -1,3 +1,11 @@
+---
+type: Reference
+title: QA Report 2026-07-15
+description: Evidence-driven QA results for the RaapTech Brain platform.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # QA Report — RaapTech Brain (full platform) — 2026-07-15
 
 **Commit / branch / URL:** `5d89505` · `cursor/brain-next-steps-plan` · local `C:\Users\Kyle\CC\raaptech-brain`

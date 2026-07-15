@@ -1,3 +1,11 @@
+---
+type: Reference
+title: Fleet Workflow Audit 2026-07-13
+description: Gate-0 fleet workflow audit and remediation proof.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Fleet + Workflow Audit — 2026-07-13
 
 **Status:** Gate 0 COMPLETE (2026-07-13 evening). Backup/restore proven; NFS+PBS active; NVMe temp alert dismissed with evidence. Remaining audit cadence items are Gate 1+.

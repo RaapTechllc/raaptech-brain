@@ -1,3 +1,11 @@
+---
+type: Reference
+title: RaapTech Brain Domain Glossary
+description: Ubiquitous language for Insights, Miners, Gate agent, and mine passes.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # RaapTech Brain
 
 Agent-traversable knowledge bundle for RaapTech. Synthesizes durable operational truth from workstation sources; does not mirror raw chat or vault dumps.

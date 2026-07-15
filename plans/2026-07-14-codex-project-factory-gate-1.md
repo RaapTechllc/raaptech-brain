@@ -1,3 +1,11 @@
+---
+type: Specification
+title: Codex Project Factory Gate 1 Plan
+description: Gate-1 execution plan for the Codex project factory.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Codex Project Factory — Gate 1 Hardening Plan
 
 > **For Hermes:** execute with Codex CLI in a clean isolated worktree. Each task is review-gated: deterministic tests first, then spec review, then standards review. No DVM service deployment, credential import, customer repository access, merge, or production mutation belongs to Gate 1.

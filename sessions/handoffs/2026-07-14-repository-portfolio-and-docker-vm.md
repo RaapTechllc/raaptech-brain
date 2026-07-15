@@ -1,3 +1,11 @@
+---
+type: Reference
+title: Repository Portfolio and Docker VM Handoff
+description: Session handoff for portfolio inventory and VM-first work.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Handoff — RaapTech Repository Portfolio and Docker VM Operating Model
 
 **Date:** 2026-07-14  

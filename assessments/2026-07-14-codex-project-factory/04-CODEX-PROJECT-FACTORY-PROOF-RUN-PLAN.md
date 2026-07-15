@@ -1,3 +1,12 @@
+---
+type: Reference
+title: 04 CODEX PROJECT FACTORY PROOF RUN PLAN
+description: "Assessment note: 04-CODEX-PROJECT-FACTORY-PROOF-RUN-PLAN."
+
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Codex Project Factory — Proof-Run Plan
 
 **Date:** 2026-07-14  

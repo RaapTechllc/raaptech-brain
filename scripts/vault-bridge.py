@@ -99,11 +99,21 @@ def vault_status(vault: Path) -> VaultStatus:
 
 
 def brain_concepts() -> list[Path]:
-    reserved = {"index.md", "log.md", "README.md"}
-    return sorted(
-        f for f in BUNDLE_ROOT.rglob("*.md")
-        if f.name not in reserved and f.relative_to(BUNDLE_ROOT).parts[0] != ".git"
-    )
+    reserved = {"index.md", "log.md", "README.md", "catalog.md"}
+    skip_parts = {".scratch", "qa-evidence", ".git"}
+    skip_prefixes = ("docs/mine/",)
+    out: list[Path] = []
+    for f in BUNDLE_ROOT.rglob("*.md"):
+        if f.name in reserved:
+            continue
+        rel = f.relative_to(BUNDLE_ROOT)
+        if any(p in skip_parts for p in rel.parts):
+            continue
+        rel_posix = rel.as_posix()
+        if any(rel_posix.startswith(p) for p in skip_prefixes):
+            continue
+        out.append(f)
+    return sorted(out)
 
 
 def parse_title(path: Path) -> str | None:
@@ -242,6 +252,10 @@ def cmd_report(vault: Path) -> int:
 
 
 def main() -> int:
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
     parser = argparse.ArgumentParser(description="Bridge raaptech-brain to RaapTech-Vault")
     parser.add_argument("--status", action="store_true", help="Show vault accessibility")
     parser.add_argument("--search", metavar="KEYWORD", help="Search vault notes by keyword")

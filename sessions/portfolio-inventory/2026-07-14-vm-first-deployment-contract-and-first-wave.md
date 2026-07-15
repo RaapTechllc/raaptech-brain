@@ -1,3 +1,11 @@
+---
+type: Specification
+title: VM-First Deployment Contract
+description: Standard VM-first deployment contract and first-wave plan.
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # RaapTech Docker VM-First Deployment Contract and First-Wave Plan
 
 **Status:** proposed standard — no deployment is authorized by this document.  

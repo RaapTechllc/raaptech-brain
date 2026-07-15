@@ -165,6 +165,10 @@ def check_status(creds_data: dict):
 
 
 def main():
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, "reconfigure"):
+            stream.reconfigure(encoding="utf-8", errors="replace")
+
     if len(sys.argv) < 2:
         print(__doc__)
         sys.exit(1)

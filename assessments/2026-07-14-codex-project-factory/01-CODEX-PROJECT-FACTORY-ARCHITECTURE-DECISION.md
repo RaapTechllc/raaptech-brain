@@ -1,3 +1,12 @@
+---
+type: Reference
+title: 01 CODEX PROJECT FACTORY ARCHITECTURE DECISION
+description: "Assessment note: 01-CODEX-PROJECT-FACTORY-ARCHITECTURE-DECISION."
+
+tags: [okf, auto-frontmatter]
+timestamp: 2026-07-15T13:55:19Z
+---
+
 # Codex Project Factory — Architecture Decision
 
 **Date:** 2026-07-14  
