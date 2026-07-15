@@ -39,6 +39,21 @@ sessions/session-catalog.md | session catalog sessions fable5 fable 5 prompts de
 sessions/sprint-tracker.md | sprint tracker sessions current state fable 5 status | Current state of all Fable 5 sessions — status, next action, blockers.
 sessions/sprint-tracker.md#next-action | next action sprint tracker implementation first fable reset | Implementation-first while Fable reset is available:.
 sessions/sprint-tracker.md#sprint-status-summary | sprint status summary tracker | Sprint Status Summary — see Sprint Tracker.
+fleet/audits/2026-07-13-fleet-workflow-audit.md | 2026 07 13 fleet workflow audit status evidence | Status: Evidence-backed read-only audit.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#executive-verdict | executive verdict 2026 07 13 fleet workflow audit | The fleet is usable, but it is not operationally dialed in yet.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#findings | findings 2026 07 13 fleet workflow audit | Findings — see 2026-07-13-fleet-workflow-audit.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#verified-current-topology | verified current topology 2026 07 13 fleet workflow | Verified current topology — see 2026-07-13-fleet-workflow-audit.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#target-role-boundaries | target role boundaries 2026 07 13 fleet workflow | Target role boundaries — see 2026-07-13-fleet-workflow-audit.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#workflow-system-to-build-after-the-safety-blockers | workflow system build safety blockers 2026 07 13 | This is an AI Developer Workflow system, not a generic agent loop.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#documentation-truth-ledger | documentation truth ledger 2026 07 13 fleet workflow | Documentation truth ledger — see 2026-07-13-fleet-workflow-audit.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#remediation-sequence | remediation sequence 2026 07 13 fleet workflow audit | Repair/verify Proxmox → TrueNAS NFS → PBS reachability.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#gate-0--no-new-infrastructure-until-this-is-done | gate 0 new infrastructure done 2026 07 13 | Repair/verify Proxmox → TrueNAS NFS → PBS reachability.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#gate-1--establish-durable-execution-surfaces | gate 1 establish durable execution surfaces 2026 07 | Install and verify QEMU Guest Agent in Windows VM.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#gate-2--make-daily-life-simpler | gate 2 make daily life simpler 2026 07 | Convert the verified host/service matrix into services.yaml.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#gate-3--maintenance-window | gate 3 maintenance window 2026 07 13 fleet | OPNsense: diagnose backup-path/routing first; then decide firmware update and Suricata policy.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#explicit-decision-on-truenas-as-a-codexcomputer-use-worker | explicit decision truenas codex computer worker 2026 07 | No.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#acceptance-criteria-for-the-actual-baseline | acceptance criteria actual baseline 2026 07 13 fleet | This audit becomes the canonical current-state baseline when:.
+fleet/audits/2026-07-13-fleet-workflow-audit.md#evidence-captured | evidence captured 2026 07 13 fleet workflow audit | Live collections: Windows workstation/Tailnet; Proxmox VM/CT/storage/backup configuration; Docker VM services/resources; Atlas gateways/log warnings; Falcon ...
 fleet/backups.md | backups disaster recovery fleet proxmox truenas docker vm | Proxmox, TrueNAS, Docker VM backup strategy and schedules.
 fleet/backups.md#architecture | architecture backups disaster recovery | Architecture — see Backups & Disaster Recovery.
 fleet/backups.md#backup-targets | backup targets backups disaster recovery | Backup Targets — see Backups & Disaster Recovery.
@@ -161,13 +176,23 @@ integrations/tradingview-mcp.md#key-capabilities | key capabilities tradingview 
 integrations/tradingview-mcp.md#indicators | indicators tradingview mcp integration lorentzian premium primary ai | Lorentzian Premium — Primary AI Edge indicator.
 integrations/tradingview-mcp.md#morning-brief-flow | morning brief flow tradingview mcp integration tv launch | mcp_tradingview_tv_launch — Start TV Desktop.
 integrations/tradingview-mcp.md#integration-with-ai-trading-council | integration ai trading council tradingview mcp strategy rules | See AI Trading Council for strategy rules and allocation.
-research/fable5-prompting-patterns.md | fable 5 prompting patterns research fable5 cost synthesis | Synthesis of Fable 5 prompting best practices — habits, routing, loop engineering, cost lessons.
-research/fable5-prompting-patterns.md#the-6-habits | 6 habits fable 5 prompting patterns give agents | Give the why — agents perform better when they understand purpose and audience.
-research/fable5-prompting-patterns.md#when-to-use-fable | fable 5 prompting patterns hard bounded outcomes generic | Hard bounded outcomes (not generic "make it better").
-research/fable5-prompting-patterns.md#when-not-to-use-fable | fable 5 prompting patterns lint fixes | Lint fixes.
-research/fable5-prompting-patterns.md#loop-engineering-boxminingai--superbash-pattern | loop engineering boxminingai superbash pattern fable 5 prompting | Instead of prompt → hope → manual review:.
-research/fable5-prompting-patterns.md#costperformance-framing-asapguide--tech-with-tim | cost performance framing asapguide tech tim fable 5 | Fable outperformed Opus on complex UI/visual/code tasks.
-research/fable5-prompting-patterns.md#research-backed-lessons | research backed lessons fable 5 prompting patterns | Research-Backed Lessons — see Fable 5 Prompting Patterns.
+research/fable5-prompting-patterns.md | ai developer workflows fable prompting patterns research fable5 | Fable 5 prompting practices reframed inside AI developer workflows: agents + deterministic code + human judgment.
+research/fable5-prompting-patterns.md#the-6-habits | 6 habits ai developer workflows fable prompting patterns | Give the why — agents perform better when they understand purpose and audience.
+research/fable5-prompting-patterns.md#the-correct-unit-ai-developer-workflow | correct unit ai developer workflow workflows fable prompting | A workflow must explicitly declare:.
+research/fable5-prompting-patterns.md#loop-engineering-is-a-subroutine-not-strategy | loop engineering subroutine strategy ai developer workflows fable | The previous useful pattern remains:.
+research/fable5-prompting-patterns.md#when-to-use-fable--a-high-capability-build-agent | fable high capability build agent ai developer workflows | Hard bounded outcomes—not generic “make it better.”.
+research/fable5-prompting-patterns.md#when-not-to-use-fable--a-high-capability-build-agent | fable high capability build agent ai developer workflows | Deterministic lint/format/typecheck/test execution.
+research/fable5-prompting-patterns.md#cost--performance-rules | cost performance rules ai developer workflows fable prompting | The harness matters as much as the raw model.
+research/fable5-prompting-patterns.md#research-backed-lessons | research backed lessons ai developer workflows fable prompting | Research-Backed Lessons — see AI Developer Workflows and Fable Prompting Patterns.
+research/indydevdan-ai-developer-workflows.md | forget loop engineering ai developer workflows research agentic | Source: IndyDevDan — “FORGET Loop Engineering.
+research/indydevdan-ai-developer-workflows.md#why-this-changes-our-model | changes model forget loop engineering ai developer workflows | We were treating *loop engineering* as the organizing concept: agent produces work, validator fails, agent patches until pass.
+research/indydevdan-ai-developer-workflows.md#core-claims-from-the-video | core claims video forget loop engineering ai developer | Core claims from the video — see Forget Loop Engineering — AI Developer Workflows.
+research/indydevdan-ai-developer-workflows.md#what-we-adopt | adopt forget loop engineering ai developer workflows | What we adopt — see Forget Loop Engineering — AI Developer Workflows.
+research/indydevdan-ai-developer-workflows.md#where-our-previous-approach-was-weak | previous approach weak forget loop engineering ai developer | We documented the repair loop, but not the workflow boundary, state machine, artifacts, ownership, routing criteria, cost budget, or escalation path.
+research/indydevdan-ai-developer-workflows.md#target-operating-model | target operating model forget loop engineering ai developer | The loop is only V → B.
+research/indydevdan-ai-developer-workflows.md#initial-workflow-catalog-to-build | initial workflow catalog build forget loop engineering ai | Initial workflow catalog to build — see Forget Loop Engineering — AI Developer Workflows.
+research/indydevdan-ai-developer-workflows.md#concrete-next-moves | concrete next moves forget loop engineering ai developer | Rename the RaapTech Brain doctrine from loop engineering to AI developer workflows / workflow factory; preserve loops as verification-repair subroutines.
+research/indydevdan-ai-developer-workflows.md#source-limits | source limits forget loop engineering ai developer workflows | This note is a synthesis of the creator’s operating model, not proof that every claim is universally correct.
 references/memories.md | references memories brain save durable facts saved domain | Durable facts saved into the references domain via brain save.
 references/memories.md#brain-retrieval-cli-2026-07-07 | brain retrieval cli 2026 07 references memories bundle | The brain bundle has a deterministic retrieval CLI at scripts/brain.py — use 'python scripts/brain.py ask' before opening files, 'brain save' to store durable ...
 references/obsidian-vault.md | obsidian vault bridge knowledge layer para verification maps | Maps raaptech-brain domains to the local RaapTech-Vault Obsidian workspace for capture, verification, and deeper context.

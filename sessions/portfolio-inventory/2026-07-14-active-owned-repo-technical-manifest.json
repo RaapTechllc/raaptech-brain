@@ -1,0 +1,694 @@
+[
+  {
+    "name": "raaptech-brain",
+    "url": "https://github.com/RaapTechllc/raaptech-brain",
+    "updatedAt": "2026-07-07T12:57:25Z",
+    "language": "HTML",
+    "description": "Consolidated OKF v0.1 knowledge bundle for RaapTech LLC",
+    "branch": "main",
+    "file_count": 58,
+    "key_paths": [
+      "CLAUDE.md",
+      "README.md",
+      "requirements.txt"
+    ],
+    "latest": {
+      "sha": "d5fb9e1114ba",
+      "date": "2026-07-07T12:56:32Z",
+      "message": "fix: clear remaining OKF warnings \u2014 strip research/index.md frontmatter, bundle-root exception in validator, specs index"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "cerebro",
+    "url": "https://github.com/RaapTechllc/cerebro",
+    "updatedAt": "2026-07-09T12:45:39Z",
+    "language": "TypeScript",
+    "description": "",
+    "branch": "master",
+    "file_count": 52,
+    "key_paths": [
+      "README.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "000d58f7ca4b",
+      "date": "2026-07-09T12:45:31Z",
+      "message": "Mission: retrieval quality eval + /goal install (#3)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "project-copilot",
+    "url": "https://github.com/RaapTechllc/project-copilot",
+    "updatedAt": "2026-07-14T04:20:48Z",
+    "language": "Python",
+    "description": "RaapTech Project Co-Pilot \u2014 guarded AI project-planning workspace",
+    "branch": "main",
+    "file_count": 235,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "AGENTS.md",
+      "README.md",
+      "apps/agent-service/Dockerfile",
+      "apps/web/Dockerfile",
+      "package.json",
+      "pnpm-lock.yaml"
+    ],
+    "latest": {
+      "sha": "7b71c3088954",
+      "date": "2026-07-14T04:20:44Z",
+      "message": "Merge pull request #14 from RaapTechllc/codex/issue-13-m3-planning-domain"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "codex-project-factory",
+    "url": "https://github.com/RaapTechllc/codex-project-factory",
+    "updatedAt": "2026-07-13T16:10:40Z",
+    "language": "TypeScript",
+    "description": "Local-first Codex project onboarding and thread-smart delivery factory",
+    "branch": "master",
+    "file_count": 75,
+    "key_paths": [
+      "README.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "7fbb782299c2",
+      "date": "2026-07-13T05:59:48Z",
+      "message": "Make milestone delivery provably safe and retryable"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "RaapTech",
+    "url": "https://github.com/RaapTechllc/RaapTech",
+    "updatedAt": "2026-07-07T04:28:23Z",
+    "language": "TypeScript",
+    "description": "",
+    "branch": "master",
+    "file_count": 52,
+    "key_paths": [
+      "Dockerfile",
+      "README.md",
+      "docker-compose.yml",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "65ac1e26ee20",
+      "date": "2026-07-07T04:28:19Z",
+      "message": "docs: add next-level redesign proposal (FABLE_5_NEXT_LEVEL_REDESIGN.md) (#9)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "trading-platform",
+    "url": "https://github.com/RaapTechllc/trading-platform",
+    "updatedAt": "2026-07-13T03:08:00Z",
+    "language": "Python",
+    "description": "",
+    "branch": "main",
+    "file_count": 667,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "CLAUDE.md",
+      "Dockerfile",
+      "README.md",
+      "docker-compose.yml",
+      "pyproject.toml",
+      "requirements.txt"
+    ],
+    "latest": {
+      "sha": "1dc3ef25a948",
+      "date": "2026-07-13T03:07:55Z",
+      "message": "Merge pull request #32 from RaapTechllc/feat/arena-scoreboard"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "codex-project-factory-e2e-20260713",
+    "url": "https://github.com/RaapTechllc/codex-project-factory-e2e-20260713",
+    "updatedAt": "2026-07-13T04:30:33Z",
+    "language": "TypeScript",
+    "description": "Disposable end-to-end fixture for Codex Project Factory",
+    "branch": "main",
+    "file_count": 11,
+    "key_paths": [
+      ".github/workflows/ci.yml",
+      "AGENTS.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "65ad9c4165fa",
+      "date": "2026-07-13T04:28:44Z",
+      "message": "Establish a reproducible baseline for factory verification"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "RaapTech-OS",
+    "url": "https://github.com/RaapTechllc/RaapTech-OS",
+    "updatedAt": "2026-07-12T16:22:06Z",
+    "language": "Python",
+    "description": "",
+    "branch": "master",
+    "file_count": 107,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "README.md",
+      "pyproject.toml"
+    ],
+    "latest": {
+      "sha": "8e3d0e12b14c",
+      "date": "2026-07-12T16:21:56Z",
+      "message": "docs: add unified agentic dashboard PRD"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "minibench",
+    "url": "https://github.com/RaapTechllc/minibench",
+    "updatedAt": "2026-07-12T14:17:05Z",
+    "language": "Python",
+    "description": "",
+    "branch": "main",
+    "file_count": 214,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "AGENTS.md",
+      "README.md",
+      "agentbench/.env.example",
+      "backend/.env.example",
+      "backend/Dockerfile",
+      "docker-compose.yml",
+      "frontend/Dockerfile"
+    ],
+    "latest": {
+      "sha": "a527665a9f97",
+      "date": "2026-07-12T14:16:56Z",
+      "message": "Arcade Scorecard: Solo/Multiplayer cabinets, saturation, Season 2 gates (#28)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "smw-cloud",
+    "url": "https://github.com/RaapTechllc/smw-cloud",
+    "updatedAt": "2026-07-02T12:41:40Z",
+    "language": "TypeScript",
+    "description": "",
+    "branch": "main",
+    "file_count": 246,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "CLAUDE.md",
+      "README.md",
+      "docker-compose.yml",
+      "package.json",
+      "pnpm-lock.yaml"
+    ],
+    "latest": {
+      "sha": "7cf37d0613d5",
+      "date": "2026-07-02T12:41:31Z",
+      "message": "fix: apply the 15 verified code-review findings (env loading, validate persistence, sandbox guard, harness hardening) (#33)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "the-pit",
+    "url": "https://github.com/RaapTechllc/the-pit",
+    "updatedAt": "2026-07-07T11:28:22Z",
+    "language": "Python",
+    "description": "",
+    "branch": "main",
+    "file_count": 174,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/tests.yml",
+      "CLAUDE.md",
+      "README.md",
+      "pyproject.toml"
+    ],
+    "latest": {
+      "sha": "e4bb835b1027",
+      "date": "2026-07-07T11:28:17Z",
+      "message": "Merge pull request #37 from RaapTechllc/claude/new-session-teyy5r"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "agent-arcade",
+    "url": "https://github.com/RaapTechllc/agent-arcade",
+    "updatedAt": "2026-07-02T03:44:54Z",
+    "language": "TypeScript",
+    "description": "",
+    "branch": "main",
+    "file_count": 119,
+    "key_paths": [
+      ".github/workflows/ci.yml",
+      "README.md",
+      "package.json",
+      "pnpm-lock.yaml"
+    ],
+    "latest": {
+      "sha": "02ddeae385b9",
+      "date": "2026-07-02T03:44:50Z",
+      "message": "Merge pull request #13 from RaapTechllc/claude/code-review-next-steps-x790i2"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "RaapTech-PDF",
+    "url": "https://github.com/RaapTechllc/RaapTech-PDF",
+    "updatedAt": "2026-07-07T04:12:39Z",
+    "language": "C#",
+    "description": "RaapTech PDF (working title: Folio) \u2014 Windows capture + PDF editing suite. PRD, OSS references, Fable 5 build track.",
+    "branch": "main",
+    "file_count": 92,
+    "key_paths": [
+      "README.md"
+    ],
+    "latest": {
+      "sha": "6831e42530cb",
+      "date": "2026-07-07T04:12:35Z",
+      "message": "Merge pull request #8 from RaapTechllc/claude/plan-pdf-tools-expansion-ygs7b3"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "fable5",
+    "url": "https://github.com/RaapTechllc/fable5",
+    "updatedAt": "2026-07-06T17:57:32Z",
+    "language": null,
+    "description": "RaapTech Fable 5 one-shot prompt discipline and operating repo. Bounded, high-leverage usage of limited/expensive Fable 5 across SMW, RDE, The Pit, Archon, etc.",
+    "branch": "main",
+    "file_count": 70,
+    "key_paths": [
+      "CLAUDE.md",
+      "README.md"
+    ],
+    "latest": {
+      "sha": "4813dbc53984",
+      "date": "2026-07-06T17:57:27Z",
+      "message": "Session 15: ops ledger + queue cleanup (Fable 5 run) (#10)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "RaapTech-Jarvis",
+    "url": "https://github.com/RaapTechllc/RaapTech-Jarvis",
+    "updatedAt": "2026-07-06T12:42:04Z",
+    "language": "TypeScript",
+    "description": "Planning repo for RaapTech Jarvis - voice-first desktop companion concept (docs/assets only)",
+    "branch": "main",
+    "file_count": 71,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "README.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "84b9125d000e",
+      "date": "2026-07-06T12:41:48Z",
+      "message": "Merge pull request #6 from RaapTechllc/claude/jarvis-capabilities-review-75n155"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "raaptech-rde",
+    "url": "https://github.com/RaapTechllc/raaptech-rde",
+    "updatedAt": "2026-07-05T23:54:03Z",
+    "language": "Python",
+    "description": "RaapTech Research Deliverable Engine \u2014 request JSON to interactive ROI calculator deliverables",
+    "branch": "main",
+    "file_count": 8,
+    "key_paths": [
+      "README.md",
+      "pyproject.toml"
+    ],
+    "latest": {
+      "sha": "4df2bc33062a",
+      "date": "2026-07-05T23:50:03Z",
+      "message": "Initial commit: RaapTech Research Deliverable Engine (P0)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "openclaw-agents",
+    "url": "https://github.com/RaapTechllc/openclaw-agents",
+    "updatedAt": "2026-06-30T01:29:38Z",
+    "language": "Python",
+    "description": "",
+    "branch": "main",
+    "file_count": 3824,
+    "key_paths": [
+      ".github/workflows/ci.yml",
+      ".github/workflows/pr-review.yml",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "axle/team-command-center/Dockerfile",
+      "damien/shared/mcp-servers/opnsense-mcp/.env.example",
+      "damien/shared/mcp-servers/proxmox-mcp/.env.example",
+      "damien/shared/mcp-servers/truenas-mcp/.env.example",
+      "mcp-servers/brain-mcp/Dockerfile",
+      "package-lock.json",
+      "package.json",
+      "projects/brain-chat-api/.env.example",
+      "projects/brain-chat-api/Dockerfile",
+      "projects/chat-widget-relay/Dockerfile",
+      "projects/resonantos/compression-api/.env.example",
+      "projects/resonantos/compression-api/Dockerfile",
+      "projects/second-brain-v2/Dockerfile",
+      "projects/second-brain-v2/projects/second-brain/Dockerfile",
+      "projects/second-brain-v2/projects/second_brain/Dockerfile",
+      "projects/second-brain/api/Dockerfile",
+      "projects/signals-bot/Dockerfile",
+      "smw-setup/Dockerfile"
+    ],
+    "latest": {
+      "sha": "9766f60b0dbf",
+      "date": "2026-06-30T01:29:34Z",
+      "message": "recover(maxx): restore selected workspace deliverables under maxx subtree (#19)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "SEO-Health-Report-System",
+    "url": "https://github.com/RaapTechllc/SEO-Health-Report-System",
+    "updatedAt": "2026-06-30T00:08:02Z",
+    "language": "Python",
+    "description": "",
+    "branch": "main",
+    "file_count": 624,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci-cd.yml",
+      ".github/workflows/deploy-production.yml",
+      ".github/workflows/deploy-staging.yml",
+      ".github/workflows/docker-build.yml",
+      ".github/workflows/lint.yml",
+      ".github/workflows/rollback.yml",
+      ".github/workflows/test.yml",
+      "CLAUDE.md",
+      "Dockerfile",
+      "README.md",
+      "apps/seo-ai/.env.example",
+      "apps/web/.env.example",
+      "docker-compose.yml",
+      "infrastructure/envs/production.env.example",
+      "infrastructure/envs/staging.env.example",
+      "pyproject.toml"
+    ],
+    "latest": {
+      "sha": "3e6b77a612d4",
+      "date": "2026-06-30T00:07:56Z",
+      "message": "Merge pull request #3 from RaapTechllc/claude/seo-ai-rewrite"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "dontbuyjunktech",
+    "url": "https://github.com/RaapTechllc/dontbuyjunktech",
+    "updatedAt": "2026-06-29T13:05:19Z",
+    "language": "TypeScript",
+    "description": "",
+    "branch": "master",
+    "file_count": 94,
+    "key_paths": [
+      ".github/workflows/ci.yml",
+      "CLAUDE.md",
+      "README.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "ab344db1da90",
+      "date": "2026-06-29T13:04:53Z",
+      "message": "Merge pull request #6 from RaapTechllc/claude/brownfield-code-quality-loop-tz2f25"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "DealForge",
+    "url": "https://github.com/RaapTechllc/DealForge",
+    "updatedAt": "2026-06-29T11:38:39Z",
+    "language": "TypeScript",
+    "description": "",
+    "branch": "main",
+    "file_count": 190,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "CLAUDE.md",
+      "README.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "9ef56eae03d1",
+      "date": "2026-06-29T11:38:34Z",
+      "message": "Pluggable integrations (10 outbound services) + expanded source catalog (#13)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "raaptech-trading-stack",
+    "url": "https://github.com/RaapTechllc/raaptech-trading-stack",
+    "updatedAt": "2026-06-26T21:05:27Z",
+    "language": "Python",
+    "description": "",
+    "branch": "main",
+    "file_count": 732,
+    "key_paths": [
+      ".github/workflows/ci.yml",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      "pyproject.toml"
+    ],
+    "latest": {
+      "sha": "d273eb57c37f",
+      "date": "2026-06-26T21:05:23Z",
+      "message": "Trading Council dashboard: agents' ideas + reasoning, calls, active trades, wins/losses, takeaways (#12)"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "hourly-opus-ultracode",
+    "url": "https://github.com/RaapTechllc/hourly-opus-ultracode",
+    "updatedAt": "2026-06-22T12:00:37Z",
+    "language": "JavaScript",
+    "description": "",
+    "branch": "main",
+    "file_count": 295,
+    "key_paths": [
+      ".github/workflows/ci.yml",
+      "README.md"
+    ],
+    "latest": {
+      "sha": "099bba9e1e26",
+      "date": "2026-06-22T12:00:29Z",
+      "message": "fix: tighten generated tool review gate"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "raaptech-vault",
+    "url": "https://github.com/RaapTechllc/raaptech-vault",
+    "updatedAt": "2026-06-22T03:40:23Z",
+    "language": "TypeScript",
+    "description": "RaapTech Obsidian Vault \u2014 fleet knowledge base",
+    "branch": "main",
+    "file_count": 1638,
+    "key_paths": [
+      "README.md"
+    ],
+    "latest": {
+      "sha": "072f7de19fd7",
+      "date": "2026-06-22T03:40:20Z",
+      "message": "docs: archive Downloads markdown cleanup"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "SMW-EMERGENT",
+    "url": "https://github.com/RaapTechllc/SMW-EMERGENT",
+    "updatedAt": "2026-06-13T13:28:49Z",
+    "language": "JavaScript",
+    "description": "",
+    "branch": "main",
+    "file_count": 87,
+    "key_paths": [
+      "README.md"
+    ],
+    "latest": {
+      "sha": "182c908a4a38",
+      "date": "2026-06-13T13:28:42Z",
+      "message": "Auto-generated changes"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "nbarunner",
+    "url": "https://github.com/RaapTechllc/nbarunner",
+    "updatedAt": "2026-05-02T21:43:50Z",
+    "language": "Python",
+    "description": "",
+    "branch": "master",
+    "file_count": 40,
+    "key_paths": [
+      "README.md"
+    ],
+    "latest": {
+      "sha": "a7b4473306a3",
+      "date": "2026-05-02T21:44:00Z",
+      "message": "FW-01: Spoof XInput descriptor to Xbox Series X|S"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "n8n-integration",
+    "url": "https://github.com/RaapTechllc/n8n-integration",
+    "updatedAt": "2026-04-28T04:08:37Z",
+    "language": "Shell",
+    "description": "",
+    "branch": "main",
+    "file_count": 123,
+    "key_paths": [],
+    "latest": {
+      "sha": "af94c2ad6e9c",
+      "date": "2026-04-28T04:08:38Z",
+      "message": "fix: bias tv monitor to bright-room mini led"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "openclaw-agent-backup",
+    "url": "https://github.com/RaapTechllc/openclaw-agent-backup",
+    "updatedAt": "2026-04-12T04:30:07Z",
+    "language": "Shell",
+    "description": "Automated sanitized backups for OpenClaw agent config/state",
+    "branch": "main",
+    "file_count": 393,
+    "key_paths": [
+      "README.md"
+    ],
+    "latest": {
+      "sha": "573095d86e60",
+      "date": "2026-04-12T04:30:03Z",
+      "message": "backup: 2026-04-12 daily snapshot (A:0 M:2 D:0)\\n\\nIncludes sanitized agent identity/memory, cron defs, skills, gateway/workspace config for restore."
+    },
+    "tree_error": null
+  },
+  {
+    "name": "funding-rate-monitor",
+    "url": "https://github.com/RaapTechllc/funding-rate-monitor",
+    "updatedAt": "2026-04-03T21:12:30Z",
+    "language": "Python",
+    "description": "",
+    "branch": "master",
+    "file_count": 3,
+    "key_paths": [
+      "requirements.txt"
+    ],
+    "latest": {
+      "sha": "e052e4505042",
+      "date": "2026-03-29T14:08:50Z",
+      "message": "Add env-var URL overrides and .gitignore"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "mc-sync",
+    "url": "https://github.com/RaapTechllc/mc-sync",
+    "updatedAt": "2026-04-03T21:12:17Z",
+    "language": "Python",
+    "description": "",
+    "branch": "master",
+    "file_count": 2,
+    "key_paths": [],
+    "latest": {
+      "sha": "95f5a789c942",
+      "date": "2026-03-27T16:25:07Z",
+      "message": "feat: Mission Control sync script \u2014 agent health + GitHub repo tracking"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "trading-research-swarm",
+    "url": "https://github.com/RaapTechllc/trading-research-swarm",
+    "updatedAt": "2026-04-03T21:07:24Z",
+    "language": "Python",
+    "description": "",
+    "branch": "master",
+    "file_count": 305,
+    "key_paths": [
+      "CLAUDE.md"
+    ],
+    "latest": {
+      "sha": "f1a1f0b47277",
+      "date": "2026-04-03T21:07:17Z",
+      "message": "Add DAMIEN-SWARM-BRIEF.md"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "beanzneez",
+    "url": "https://github.com/RaapTechllc/beanzneez",
+    "updatedAt": "2026-03-19T23:41:57Z",
+    "language": "TypeScript",
+    "description": "Coffee website to find best deals.",
+    "branch": "main",
+    "file_count": 126,
+    "key_paths": [
+      ".env.example",
+      ".github/workflows/ci.yml",
+      "CLAUDE.md",
+      "Dockerfile",
+      "README.md",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "1505fc918d6f",
+      "date": "2026-03-19T23:41:54Z",
+      "message": "fix: include convex/_generated in repo for CI builds"
+    },
+    "tree_error": null
+  },
+  {
+    "name": "beanzneez-v2",
+    "url": "https://github.com/RaapTechllc/beanzneez-v2",
+    "updatedAt": "2026-03-15T20:29:34Z",
+    "language": "TypeScript",
+    "description": "Coffee deal discovery app \u2014 Next.js 15, Prisma, Leaflet maps, NextAuth",
+    "branch": "main",
+    "file_count": 85,
+    "key_paths": [
+      ".env.example",
+      "Dockerfile",
+      "README.md",
+      "docker-compose.yml",
+      "package-lock.json",
+      "package.json"
+    ],
+    "latest": {
+      "sha": "6eb23adfb6e3",
+      "date": "2026-03-15T20:29:30Z",
+      "message": "docs: add APP-SPEC.md"
+    },
+    "tree_error": null
+  }
+]

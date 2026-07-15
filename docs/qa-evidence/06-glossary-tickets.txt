@@ -1,0 +1,11 @@
+=== CONTEXT.md Insight/Miner/Gate ===
+**Insight**:
+**Miner**:
+**Gate agent**:
+**Hermes audit**:
+**Thin proof**:
+=== specs index mine-pass ===
+* [Mine Pass (2026-07-09)](/docs/superpowers/specs/2026-07-09-mine-pass-design.md) — Miners, Gate agent, Hermes audit, thin proof
+=== tickets frontier ===
+## Mine staging scaffold
+**Blocked by:** Mine staging scaffold

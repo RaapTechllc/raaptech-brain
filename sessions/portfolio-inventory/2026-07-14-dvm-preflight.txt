@@ -1,0 +1,388 @@
+
+===== TIMESTAMP_AND_HOST =====
+2026-07-14T15:21:26+00:00
+ Static hostname: dockervm
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: 2cdd4551f4124b36acfe321e9f8e0db1
+         Boot ID: 645c36ecf40e40c4b6830358ef3d23d2
+  Virtualization: kvm
+Operating System: Ubuntu 24.04.3 LTS
+          Kernel: Linux 6.8.0-134-generic
+    Architecture: x86-64
+ Hardware Vendor: QEMU
+  Hardware Model: Standard PC _Q35 + ICH9, 2009_
+Firmware Version: 4.2025.05-2
+   Firmware Date: Thu 2025-11-13
+    Firmware Age: 8month
+ 15:21:26 up 13:43,  1 user,  load average: 0.12, 0.14, 0.13
+
+===== IDENTITY_AND_NETWORK =====
+uid=1000(dvm) gid=1000(dvm) groups=1000(dvm),4(adm),24(cdrom),27(sudo),30(dip),46(plugdev),101(lxd),988(docker)
+lo               UNKNOWN        127.0.0.1/8 ::1/128 
+enp6s18          UP             10.0.0.100/24 2600:1702:6090:e850::c/128 2600:1702:6090:e850:be24:11ff:fe6b:f74d/64 fe80::be24:11ff:fe6b:f74d/64 
+tailscale0       UNKNOWN        100.97.87.28/32 fd7a:115c:a1e0::6e01:578c/128 fe80::7f48:21ac:a279:a4b6/64 
+br-10dcdb7cfa7d  UP             172.21.0.1/16 fe80::389d:97ff:fef3:6bcb/64 
+br-c4e30aab1c15  UP             172.18.0.1/16 fe80::b8e5:c8ff:fe65:12dd/64 
+br-f97b8a159205  UP             172.23.0.1/16 fe80::a4df:73ff:fe6b:592c/64 
+br-21c8469e2e11  UP             172.27.0.1/16 fe80::bcb9:40ff:fe2b:39be/64 
+br-35d437ccf839  UP             172.26.0.1/16 fe80::8c02:2ff:fe1d:78d4/64 
+br-3de7631edf82  UP             172.24.0.1/16 fe80::b417:c2ff:fe2d:8d58/64 
+docker0          UP             172.17.0.1/16 fe80::3056:5fff:fedd:a469/64 
+br-cb1e07335eb0  UP             172.25.0.1/16 fe80::1c1b:49ff:fe2c:bc60/64 
+vethb3464b5@if2  UP             fe80::80fd:f8ff:fec5:d6f9/64 
+vetha746546@if2  UP             fe80::3040:1dff:fefb:2033/64 
+veth3ef6f53@if2  UP             fe80::bca9:8eff:fee9:9137/64 
+veth2b46d06@if2  UP             fe80::70c2:3bff:fee0:d45/64 
+veth8d3853c@if2  UP             fe80::2c46:3bff:fe56:1782/64 
+vethd9ccfd3@if2  UP             fe80::f052:b0ff:fe54:2f96/64 
+veth92604b4@if2  UP             fe80::7cb1:cbff:fe01:7681/64 
+veth81405a6@if2  UP             fe80::d45c:bff:fefe:2cc7/64 
+veth9afeaa8@if2  UP             fe80::f8f8:a6ff:febe:4aca/64 
+vetheb66db2@if2  UP             fe80::94dc:45ff:fe00:e74b/64 
+vethf2f1aad@if2  UP             fe80::584e:75ff:fea4:25cb/64 
+veth0916a9a@if2  UP             fe80::7c46:6bff:fec3:9cc7/64 
+veth26edfda@if2  UP             fe80::7867:14ff:fed6:eadc/64 
+veth9f10ea5@if2  UP             fe80::e004:ff:fe16:915f/64 
+veth6b6493a@if2  UP             fe80::bc58:b9ff:fecd:1d78/64 
+veth634f363@if2  UP             fe80::8d3:12ff:fe5f:96e6/64 
+veth487a951@if2  UP             fe80::a874:b3ff:fe61:aaca/64 
+vethfddffbe@if2  UP             fe80::a086:91ff:feff:c405/64 
+vethbe9d757@if2  UP             fe80::945a:65ff:fe45:1802/64 
+veth952d870@if2  UP             fe80::7ce2:efff:fef9:9fd2/64 
+veth48f42c5@if2  UP             fe80::54a9:b2ff:fe15:a3c3/64 
+veth74f9198@if2  UP             fe80::20dc:86ff:fee6:c0f9/64 
+vethac0368d@if2  UP             fe80::c493:88ff:fed9:c6a2/64 
+veth956689c@if2  UP             fe80::a0c3:feff:fe20:6afb/64 
+vethbd8fa6e@if3  UP             fe80::4890:a8ff:fe5e:39a7/64 
+veth941439d@if2  UP             fe80::9844:caff:fe02:311b/64 
+vethf2fb802@if2  UP             fe80::44df:e5ff:fed1:749d/64 
+{
+  "HostName": "dockervm",
+  "TailscaleIPs": [
+    "100.97.87.28",
+    "fd7a:115c:a1e0::6e01:578c"
+  ],
+  "Online": true,
+  "OS": "linux"
+}
+
+===== RUNTIME =====
+Docker version 29.1.5, build 0e6fee6
+Docker Compose version v5.0.2
+{"ID":"b9708a8f-30e0-4340-9f3d-77a3d32696ee","Containers":29,"ContainersRunning":29,"ContainersPaused":0,"ContainersStopped":0,"Images":27,"Driver":"overlayfs","DriverStatus":[["driver-type","io.containerd.snapshotter.v1"]],"Plugins":{"Volume":["local"],"Network":["bridge","host","ipvlan","macvlan","null","overlay"],"Authorization":null,"Log":["awslogs","fluentd","gcplogs","gelf","journald","json-file","local","splunk","syslog"]},"MemoryLimit":true,"SwapLimit":true,"CpuCfsPeriod":true,"CpuCfsQuota":true,"CPUShares":true,"CPUSet":true,"PidsLimit":true,"IPv4Forwarding":true,"Debug":false,"NFd":277,"OomKillDisable":false,"NGoroutines":261,"SystemTime":"2026-07-14T15:21:26.84639186Z","LoggingDriver":"json-file","CgroupDriver":"systemd","CgroupVersion":"2","NEventsListener":1,"KernelVersion":"6.8.0-134-generic","OperatingSystem":"Ubuntu 24.04.3 LTS","OSVersion":"24.04","OSType":"linux","Architecture":"x86_64","IndexServerAddress":"https://index.docker.io/v1/","RegistryConfig":{"InsecureRegistryCIDRs":["::1/128","127.0.0.0/8"],"IndexConfigs":{"docker.io":{"Name":"docker.io","Mirrors":[],"Secure":true,"Official":true}},"Mirrors":[]},"NCPU":8,"MemTotal":50443255808,"GenericResources":null,"DockerRootDir":"/var/lib/docker","HttpProxy":"","HttpsProxy":"","NoProxy":"","Name":"dockervm","Labels":[],"ExperimentalBuild":false,"ServerVersion":"29.1.5","Runtimes":{"io.containerd.runc.v2":{"path":"runc","status":{"org.opencontainers.runtime-spec.features":"{\"ociVersionMin\":\"1.0.0\",\"ociVersionMax\":\"1.2.1\",\"hooks\":[\"prestart\",\"createRuntime\",\"createContainer\",\"startContainer\",\"poststart\",\"poststop\"],\"mountOptions\":[\"async\",\"atime\",\"bind\",\"defaults\",\"dev\",\"diratime\",\"dirsync\",\"exec\",\"iversion\",\"lazytime\",\"loud\",\"mand\",\"noatime\",\"nodev\",\"nodiratime\",\"noexec\",\"noiversion\",\"nolazytime\",\"nomand\",\"norelatime\",\"nostrictatime\",\"nosuid\",\"nosymfollow\",\"private\",\"ratime\",\"rbind\",\"rdev\",\"rdiratime\",\"relatime\",\"remount\",\"rexec\",\"rnoatime\",\"rnodev\",\"rnodiratime\",\"rnoexec\",\"rnorelatime\",\"rnostrictatime\",\"rnosuid\",\"rnosymfollow\",\"ro\",\"rprivate\",\"rrelatime\",\"rro\",\"rrw\",\"rshared\",\"rslave\",\"rstrictatime\",\"rsuid\",\"rsymfollow\",\"runbindable\",\"rw\",\"shared\",\"silent\",\"slave\",\"strictatime\",\"suid\",\"symfollow\",\"sync\",\"tmpcopyup\",\"unbindable\"],\"linux\":{\"namespaces\":[\"cgroup\",\"ipc\",\"mount\",\"network\",\"pid\",\"time\",\"user\",\"uts\"],\"capabilities\":[\"CAP_CHOWN\",\"CAP_DAC_OVERRIDE\",\"CAP_DAC_READ_SEARCH\",\"CAP_FOWNER\",\"CAP_FSETID\",\"CAP_KILL\",\"CAP_SETGID\",\"CAP_SETUID\",\"CAP_SETPCAP\",\"CAP_LINUX_IMMUTABLE\",\"CAP_NET_BIND_SERVICE\",\"CAP_NET_BROADCAST\",\"CAP_NET_ADMIN\",\"CAP_NET_RAW\",\"CAP_IPC_LOCK\",\"CAP_IPC_OWNER\",\"CAP_SYS_MODULE\",\"CAP_SYS_RAWIO\",\"CAP_SYS_CHROOT\",\"CAP_SYS_PTRACE\",\"CAP_SYS_PACCT\",\"CAP_SYS_ADMIN\",\"CAP_SYS_BOOT\",\"CAP_SYS_NICE\",\"CAP_SYS_RESOURCE\",\"CAP_SYS_TIME\",\"CAP_SYS_TTY_CONFIG\",\"CAP_MKNOD\",\"CAP_LEASE\",\"CAP_AUDIT_WRITE\",\"CAP_AUDIT_CONTROL\",\"CAP_SETFCAP\",\"CAP_MAC_OVERRIDE\",\"CAP_MAC_ADMIN\",\"CAP_SYSLOG\",\"CAP_WAKE_ALARM\",\"CAP_BLOCK_SUSPEND\",\"CAP_AUDIT_READ\",\"CAP_PERFMON\",\"CAP_BPF\",\"CAP_CHECKPOINT_RESTORE\"],\"cgroup\":{\"v1\":true,\"v2\":true,\"systemd\":true,\"systemdUser\":true,\"rdma\":true},\"seccomp\":{\"enabled\":true,\"actions\":[\"SCMP_ACT_ALLOW\",\"SCMP_ACT_ERRNO\",\"SCMP_ACT_KILL\",\"SCMP_ACT_KILL_PROCESS\",\"SCMP_ACT_KILL_THREAD\",\"SCMP_ACT_LOG\",\"SCMP_ACT_NOTIFY\",\"SCMP_ACT_TRACE\",\"SCMP_ACT_TRAP\"],\"operators\":[\"SCMP_CMP_EQ\",\"SCMP_CMP_GE\",\"SCMP_CMP_GT\",\"SCMP_CMP_LE\",\"SCMP_CMP_LT\",\"SCMP_CMP_MASKED_EQ\",\"SCMP_CMP_NE\"],\"archs\":[\"SCMP_ARCH_AARCH64\",\"SCMP_ARCH_ARM\",\"SCMP_ARCH_MIPS\",\"SCMP_ARCH_MIPS64\",\"SCMP_ARCH_MIPS64N32\",\"SCMP_ARCH_MIPSEL\",\"SCMP_ARCH_MIPSEL64\",\"SCMP_ARCH_MIPSEL64N32\",\"SCMP_ARCH_PPC\",\"SCMP_ARCH_PPC64\",\"SCMP_ARCH_PPC64LE\",\"SCMP_ARCH_RISCV64\",\"SCMP_ARCH_S390\",\"SCMP_ARCH_S390X\",\"SCMP_ARCH_X32\",\"SCMP_ARCH_X86\",\"SCMP_ARCH_X86_64\"],\"knownFlags\":[\"SECCOMP_FILTER_FLAG_TSYNC\",\"SECCOMP_FILTER_FLAG_SPEC_ALLOW\",\"SECCOMP_FILTER_FLAG_LOG\"],\"supportedFlags\":[\"SECCOMP_FILTER_FLAG_TSYNC\",\"SECCOMP_FILTER_FLAG_SPEC_ALLOW\",\"SECCOMP_FILTER_FLAG_LOG\"]},\"apparmor\":{\"enabled\":true},\"selinux\":{\"enabled\":true},\"intelRdt\":{\"enabled\":true},\"mountExtensions\":{\"idmap\":{\"enabled\":true}}},\"annotations\":{\"io.github.seccomp.libseccomp.version\":\"2.5.5\",\"org.opencontainers.runc.checkpoint.enabled\":\"true\",\"org.opencontainers.runc.commit\":\"v1.3.4-0-gd6d73eb8\",\"org.opencontainers.runc.version\":\"1.3.4\\n\"},\"potentiallyUnsafeConfigAnnotations\":[\"bundle\",\"org.systemd.property.\",\"org.criu.config\"]}"}},"runc":{"path":"runc","status":{"org.opencontainers.runtime-spec.features":"{\"ociVersionMin\":\"1.0.0\",\"ociVersionMax\":\"1.2.1\",\"hooks\":[\"prestart\",\"createRuntime\",\"createContainer\",\"startContainer\",\"poststart\",\"poststop\"],\"mountOptions\":[\"async\",\"atime\",\"bind\",\"defaults\",\"dev\",\"diratime\",\"dirsync\",\"exec\",\"iversion\",\"lazytime\",\"loud\",\"mand\",\"noatime\",\"nodev\",\"nodiratime\",\"noexec\",\"noiversion\",\"nolazytime\",\"nomand\",\"norelatime\",\"nostrictatime\",\"nosuid\",\"nosymfollow\",\"private\",\"ratime\",\"rbind\",\"rdev\",\"rdiratime\",\"relatime\",\"remount\",\"rexec\",\"rnoatime\",\"rnodev\",\"rnodiratime\",\"rnoexec\",\"rnorelatime\",\"rnostrictatime\",\"rnosuid\",\"rnosymfollow\",\"ro\",\"rprivate\",\"rrelatime\",\"rro\",\"rrw\",\"rshared\",\"rslave\",\"rstrictatime\",\"rsuid\",\"rsymfollow\",\"runbindable\",\"rw\",\"shared\",\"silent\",\"slave\",\"strictatime\",\"suid\",\"symfollow\",\"sync\",\"tmpcopyup\",\"unbindable\"],\"linux\":{\"namespaces\":[\"cgroup\",\"ipc\",\"mount\",\"network\",\"pid\",\"time\",\"user\",\"uts\"],\"capabilities\":[\"CAP_CHOWN\",\"CAP_DAC_OVERRIDE\",\"CAP_DAC_READ_SEARCH\",\"CAP_FOWNER\",\"CAP_FSETID\",\"CAP_KILL\",\"CAP_SETGID\",\"CAP_SETUID\",\"CAP_SETPCAP\",\"CAP_LINUX_IMMUTABLE\",\"CAP_NET_BIND_SERVICE\",\"CAP_NET_BROADCAST\",\"CAP_NET_ADMIN\",\"CAP_NET_RAW\",\"CAP_IPC_LOCK\",\"CAP_IPC_OWNER\",\"CAP_SYS_MODULE\",\"CAP_SYS_RAWIO\",\"CAP_SYS_CHROOT\",\"CAP_SYS_PTRACE\",\"CAP_SYS_PACCT\",\"CAP_SYS_ADMIN\",\"CAP_SYS_BOOT\",\"CAP_SYS_NICE\",\"CAP_SYS_RESOURCE\",\"CAP_SYS_TIME\",\"CAP_SYS_TTY_CONFIG\",\"CAP_MKNOD\",\"CAP_LEASE\",\"CAP_AUDIT_WRITE\",\"CAP_AUDIT_CONTROL\",\"CAP_SETFCAP\",\"CAP_MAC_OVERRIDE\",\"CAP_MAC_ADMIN\",\"CAP_SYSLOG\",\"CAP_WAKE_ALARM\",\"CAP_BLOCK_SUSPEND\",\"CAP_AUDIT_READ\",\"CAP_PERFMON\",\"CAP_BPF\",\"CAP_CHECKPOINT_RESTORE\"],\"cgroup\":{\"v1\":true,\"v2\":true,\"systemd\":true,\"systemdUser\":true,\"rdma\":true},\"seccomp\":{\"enabled\":true,\"actions\":[\"SCMP_ACT_ALLOW\",\"SCMP_ACT_ERRNO\",\"SCMP_ACT_KILL\",\"SCMP_ACT_KILL_PROCESS\",\"SCMP_ACT_KILL_THREAD\",\"SCMP_ACT_LOG\",\"SCMP_ACT_NOTIFY\",\"SCMP_ACT_TRACE\",\"SCMP_ACT_TRAP\"],\"operators\":[\"SCMP_CMP_EQ\",\"SCMP_CMP_GE\",\"SCMP_CMP_GT\",\"SCMP_CMP_LE\",\"SCMP_CMP_LT\",\"SCMP_CMP_MASKED_EQ\",\"SCMP_CMP_NE\"],\"archs\":[\"SCMP_ARCH_AARCH64\",\"SCMP_ARCH_ARM\",\"SCMP_ARCH_MIPS\",\"SCMP_ARCH_MIPS64\",\"SCMP_ARCH_MIPS64N32\",\"SCMP_ARCH_MIPSEL\",\"SCMP_ARCH_MIPSEL64\",\"SCMP_ARCH_MIPSEL64N32\",\"SCMP_ARCH_PPC\",\"SCMP_ARCH_PPC64\",\"SCMP_ARCH_PPC64LE\",\"SCMP_ARCH_RISCV64\",\"SCMP_ARCH_S390\",\"SCMP_ARCH_S390X\",\"SCMP_ARCH_X32\",\"SCMP_ARCH_X86\",\"SCMP_ARCH_X86_64\"],\"knownFlags\":[\"SECCOMP_FILTER_FLAG_TSYNC\",\"SECCOMP_FILTER_FLAG_SPEC_ALLOW\",\"SECCOMP_FILTER_FLAG_LOG\"],\"supportedFlags\":[\"SECCOMP_FILTER_FLAG_TSYNC\",\"SECCOMP_FILTER_FLAG_SPEC_ALLOW\",\"SECCOMP_FILTER_FLAG_LOG\"]},\"apparmor\":{\"enabled\":true},\"selinux\":{\"enabled\":true},\"intelRdt\":{\"enabled\":true},\"mountExtensions\":{\"idmap\":{\"enabled\":true}}},\"annotations\":{\"io.github.seccomp.libseccomp.version\":\"2.5.5\",\"org.opencontainers.runc.checkpoint.enabled\":\"true\",\"org.opencontainers.runc.commit\":\"v1.3.4-0-gd6d73eb8\",\"org.opencontainers.runc.version\":\"1.3.4\\n\"},\"potentiallyUnsafeConfigAnnotations\":[\"bundle\",\"org.systemd.property.\",\"org.criu.config\"]}"}}},"DefaultRuntime":"runc","Swarm":{"NodeID":"","NodeAddr":"","LocalNodeState":"inactive","ControlAvailable":false,"Error":"","RemoteManagers":null},"LiveRestoreEnabled":false,"Isolation":"","InitBinary":"docker-init","ContainerdCommit":{"ID":"dea7da592f5d1d2b7755e3a161be07f43fad8f75"},"RuncCommit":{"ID":"v1.3.4-0-gd6d73eb8"},"InitCommit":{"ID":"de40ad0"},"SecurityOptions":["name=apparmor","name=seccomp,profile=builtin","name=cgroupns"],"FirewallBackend":{"Driver":"iptables"},"CDISpecDirs":["/etc/cdi","/var/run/cdi"],"Containerd":{"Address":"/run/containerd/containerd.sock","Namespaces":{"Containers":"moby","Plugins":"plugins.moby"}},"Warnings":null,"ClientInfo":{"Debug":false,"Platform":{"Name":"Docker Engine - Community"},"Version":"29.1.5","DefaultAPIVersion":"1.52","GitCommit":"0e6fee6","GoVersion":"go1.25.6","Os":"linux","Arch":"amd64","BuildTime":"Fri Jan 16 12:48:47 2026","Context":"default","Plugins":[{"SchemaVersion":"0.1.0","Vendor":"Docker Inc.","Version":"v0.30.1","ShortDescription":"Docker Buildx","Name":"buildx","Path":"/usr/libexec/docker/cli-plugins/docker-buildx"},{"SchemaVersion":"0.1.0","Vendor":"Docker Inc.","Version":"v5.0.2","ShortDescription":"Docker Compose","Name":"compose","Path":"/usr/libexec/docker/cli-plugins/docker-compose"}],"Warnings":null}}
+
+===== CONTAINERS =====
+NAMES                     IMAGE                                          STATUS                  PORTS
+raaptech-website-web-1    raaptech-website-web                           Up 11 hours (healthy)   0.0.0.0:3035->3000/tcp, [::]:3035->3000/tcp
+rustdesk-server           rustdesk/rustdesk-server:latest                Up 14 hours             
+rustdesk-relay            rustdesk/rustdesk-server:latest                Up 14 hours             
+yt-dlp-svc                n8n-yt-dlp-svc                                 Up 14 hours (healthy)   8080/tcp
+n8n                       n8nio/n8n:2.18.5                               Up 14 hours             5678/tcp
+copilot-cost-calculator   nginx:alpine                                   Up 14 hours             0.0.0.0:8898->80/tcp, [::]:8898->80/tcp
+n8n-postgres              postgres:15-alpine                             Up 14 hours (healthy)   5432/tcp
+trading-platform          trading-platform-trading-platform              Up 14 hours (healthy)   0.0.0.0:3045->8080/tcp, [::]:3045->8080/tcp
+trading-postgres          postgres:16-alpine                             Up 14 hours             0.0.0.0:5437->5432/tcp, [::]:5437->5432/tcp
+n8n-nginx                 nginx:1.27-alpine                              Up 14 hours (healthy)   80/tcp, 0.0.0.0:5678->5678/tcp
+minibench-frontend-1      minibench-frontend                             Up 14 hours             0.0.0.0:3071->80/tcp, [::]:3071->80/tcp
+minibench-api-1           minibench-api                                  Up 14 hours             0.0.0.0:3070->3070/tcp, [::]:3070->3070/tcp
+minibench-db-1            postgres:16-alpine                             Up 14 hours (healthy)   0.0.0.0:5438->5432/tcp, [::]:5438->5432/tcp
+second-brain-api          second-brain-second-brain-api                  Up 14 hours (healthy)   0.0.0.0:3055->3055/tcp, [::]:3055->3055/tcp
+beanzneez-v2-app-1        beanzneez-v2-app                               Up 14 hours             0.0.0.0:3034->3000/tcp, [::]:3034->3000/tcp
+beanzneez-v2-db-1         d326a0ce8bce                                   Up 14 hours (healthy)   0.0.0.0:5434->5432/tcp, [::]:5434->5432/tcp
+postgres-backup           prodrigestivill/postgres-backup-local:alpine   Up 14 hours (healthy)   5432/tcp
+brain-search-api          brain-search-api-brain-search-api              Up 14 hours             127.0.0.1:8100->8100/tcp
+raapmem-api               raapmem-api:latest                             Up 14 hours (healthy)   127.0.0.1:8101->8101/tcp
+minio                     minio/minio                                    Up 14 hours             127.0.0.1:9000-9001->9000-9001/tcp
+brain-postgres            pgvector/pgvector:pg16                         Up 14 hours (healthy)   127.0.0.1:5436->5432/tcp
+brain-chat-ui             brain-chat-api-brain-chat-ui                   Up 14 hours (healthy)   0.0.0.0:3050->3050/tcp, [::]:3050->3050/tcp
+dozzle                    amir20/dozzle:latest                           Up 14 hours             127.0.0.1:8889->8080/tcp
+brain-chat-api            brain-chat-api-brain-chat-api                  Up 14 hours (healthy)   
+brain-mcp                 brain-mcp:latest                               Up 14 hours             
+uptime-kuma               louislam/uptime-kuma:latest                    Up 14 hours (healthy)   0.0.0.0:3001->3001/tcp, [::]:3001->3001/tcp
+n8n-mcp                   ghcr.io/czlonkowski/n8n-mcp:latest             Up 14 hours (healthy)   3000/tcp, 0.0.0.0:8055->8055/tcp, [::]:8055->8055/tcp
+portainer                 portainer/portainer-ce:latest                  Up 14 hours             127.0.0.1:8000->8000/tcp, 127.0.0.1:9443->9443/tcp, 9000/tcp
+npm                       jc21/nginx-proxy-manager:latest                Up 14 hours             0.0.0.0:80-81->80-81/tcp, [::]:80-81->80-81/tcp, 0.0.0.0:443->443/tcp, [::]:443->443/tcp
+
+===== COMPOSE_PROJECTS =====
+NAME                STATUS              CONFIG FILES
+beanzneez-v2        running(2)          /opt/apps/beanzneez-v2/docker-compose.yml
+brain-chat-api      running(3)          /home/dvm/projects/brain-chat-api/docker-compose.frontend.yml,/home/dvm/projects/brain-chat-api/docker-compose.yml
+brain-search-api    running(1)          /home/dvm/services/brain-search-api/docker-compose.yml
+docker-compose      running(3)          /home/dvm/docker-compose/monitoring.yml
+minibench           running(3)          /home/dvm/minibench/docker-compose.yml
+n8n                 running(4)          /home/dvm/docker/n8n/docker-compose.yml,/home/dvm/docker/n8n/docker-compose.override.yml
+n8n-mcp             running(1)          /home/dvm/projects/n8n-mcp/docker-compose.yml
+raapmem             running(1)          /home/dvm/projects/raapmem/docker-compose.yml
+raaptech-website    running(1)          /home/dvm/projects/raaptech-website/docker-compose.yml
+rustdesk            running(2)          /home/dvm/rustdesk/docker-compose.yml
+second-brain        running(1)          /opt/second-brain/docker-compose.yml
+trading-platform    running(1)          /home/dvm/projects/trading-platform/docker-compose.yml
+
+===== VOLUMES =====
+DRIVER    VOLUME NAME
+local     8bae52e4958df92e54d58ce1e2aeb6b20468d41a0ab343b2ac3fffb00ca00684
+local     75e2c5bc6f68f016ea544b11c30c44011ee498f928a84fb7f54c212d8aaf2014
+local     0309c719b5c11a64d9e73323fdecc207fe8fad8c5ccc0e89e63d1056704a6cb4
+local     archon_db_data
+local     beanzneez-v2_node_modules
+local     beanzneez-v2_pgdata
+local     brain-pgdata
+local     docker-compose_pg-backups
+local     docker-compose_uptime-kuma-data
+local     f03ec7c527cf8cd4fd919c5407111404f2cde68a13f731579f84f2633221624b
+local     minibench_pgdata
+local     n8n-mcp_n8n-mcp-data
+local     n8n_data
+local     n8n_postgres_data
+local     paperclip_paperclip-data
+local     paperclip_pgdata
+local     seo-health-report-system_postgres_data
+local     smw-cloud_smw_postgres_data
+local     smw-cloud_smw_redis_data
+local     trading-platform_trading-data
+Images space usage:
+
+REPOSITORY                              TAG           IMAGE ID       CREATED         SIZE      SHARED SIZE   UNIQUE SIZE   CONTAINERS
+n8n-yt-dlp-svc                          latest        d261726ed6b3   2 months ago    1.29GB    0B            1.293GB       1
+n8nio/n8n                               2.18.5        2d70fafea7c0   2 months ago    2.28GB    0B            2.282GB       1
+raaptech-website-web                    latest        1c2daef53250   2 months ago    337MB     9.11MB        327.6MB       1
+nginx                                   alpine        5616878291a2   2 months ago    93.5MB    9.11MB        84.37MB       1
+postgres                                15-alpine     c43f162c605f   2 months ago    392MB     9.11MB        383.2MB       1
+trading-platform-trading-platform       latest        ee4dc26ea8f5   3 months ago    1.07GB    133.7MB       937.1MB       1
+minibench-frontend                      latest        8bfc9e86b74b   3 months ago    93.5MB    9.105MB       84.4MB        1
+minibench-api                           latest        19cbe9f7d41c   3 months ago    310MB     133.7MB       176.6MB       1
+second-brain-second-brain-api           latest        d4c85f6dbd8f   3 months ago    236MB     87.42MB       148.6MB       1
+beanzneez-v2-app                        latest        c25a3d8387d6   4 months ago    241MB     9.105MB       231.5MB       1
+brain-search-api-brain-search-api       latest        45e062f28996   4 months ago    258MB     0B            257.9MB       1
+raapmem-api                             latest        8de22157bd9b   4 months ago    195MB     172.6MB       22.49MB       1
+postgres                                16-alpine     20edbde7749f   4 months ago    395MB     9.105MB       386.3MB       2
+brain-chat-api-brain-chat-api           latest        7b6310184519   4 months ago    209MB     0B            208.9MB       1
+brain-chat-api-brain-chat-ui            latest        9419a2d8149c   4 months ago    261MB     172.6MB       88.36MB       1
+brain-mcp                               latest        4b5d6da26b6f   5 months ago    283MB     0B            282.8MB       1
+<none>                                  <none>        d326a0ce8bce   5 months ago    287MB     9.105MB       277.8MB       1
+amir20/dozzle                           latest        2d59d09503f2   5 months ago    55.8MB    0B            55.75MB       1
+ghcr.io/czlonkowski/n8n-mcp             latest        b8c0ef8f68cc   5 months ago    485MB     0B            484.9MB       1
+jc21/nginx-proxy-manager                latest        669be1a294d4   6 months ago    1.25GB    0B            1.245GB       1
+rustdesk/rustdesk-server                latest        10818ec05b17   6 months ago    19MB      0B            18.99MB       2
+portainer/portainer-ce                  latest        4786931dc7c5   6 months ago    185MB     0B            184.6MB       1
+pgvector/pgvector                       pg16          0a07c4114ba6   8 months ago    538MB     0B            538MB         1
+louislam/uptime-kuma                    latest        3d632903e6af   8 months ago    568MB     0B            567.6MB       1
+prodrigestivill/postgres-backup-local   alpine        5519b121b9f3   9 months ago    311MB     0B            311.4MB       1
+minio/minio                             latest        14cea493d9a3   10 months ago   179MB     0B            178.6MB       1
+nginx                                   1.27-alpine   65645c7bb6a0   15 months ago   74.5MB    0B            74.47MB       1
+
+Containers space usage:
+
+CONTAINER ID   IMAGE                                          COMMAND                  LOCAL VOLUMES   SIZE      CREATED        STATUS                  NAMES
+d06c92b772ac   raaptech-website-web                           "docker-entrypoint.s…"   0               4.1kB     11 hours ago   Up 11 hours (healthy)   raaptech-website-web-1
+f17fd38a5aca   rustdesk/rustdesk-server:latest                "hbbs"                   0               4.1kB     8 days ago     Up 14 hours             rustdesk-server
+3a9da83d92fd   rustdesk/rustdesk-server:latest                "hbbr"                   0               4.1kB     8 days ago     Up 14 hours             rustdesk-relay
+68938bdb5bb3   n8n-yt-dlp-svc                                 "uvicorn main:app --…"   0               5.72MB    2 months ago   Up 14 hours (healthy)   yt-dlp-svc
+f007217ce1aa   n8nio/n8n:2.18.5                               "tini -- /docker-ent…"   1               55.6MB    2 months ago   Up 14 hours             n8n
+dbf244d1c294   nginx:alpine                                   "/docker-entrypoint.…"   0               81.9kB    2 months ago   Up 14 hours             copilot-cost-calculator
+87ca64d33722   postgres:15-alpine                             "docker-entrypoint.s…"   1               90.1kB    2 months ago   Up 14 hours (healthy)   n8n-postgres
+baa7db625c40   trading-platform-trading-platform              "python serve_dashbo…"   1               202MB     3 months ago   Up 14 hours (healthy)   trading-platform
+ce157ea80502   postgres:16-alpine                             "docker-entrypoint.s…"   1               28.7kB    3 months ago   Up 14 hours             trading-postgres
+9cff4c3c8865   nginx:1.27-alpine                              "/docker-entrypoint.…"   0               123kB     3 months ago   Up 14 hours (healthy)   n8n-nginx
+461a6a5ee8e9   minibench-frontend                             "/docker-entrypoint.…"   0               81.9kB    3 months ago   Up 14 hours             minibench-frontend-1
+f466fcac75e1   minibench-api                                  "uvicorn app.main:ap…"   0               987kB     3 months ago   Up 14 hours             minibench-api-1
+f9ed00386e94   postgres:16-alpine                             "docker-entrypoint.s…"   1               20.5kB    3 months ago   Up 14 hours (healthy)   minibench-db-1
+7dcf557a2728   second-brain-second-brain-api                  "uvicorn main:app --…"   0               303kB     3 months ago   Up 14 hours (healthy)   second-brain-api
+f06f2434b59c   beanzneez-v2-app                               "docker-entrypoint.s…"   0               552MB     4 months ago   Up 14 hours             beanzneez-v2-app-1
+81a7faf5f89e   d326a0ce8bce                                   "docker-entrypoint.s…"   1               20.5kB    4 months ago   Up 14 hours (healthy)   beanzneez-v2-db-1
+9048ede4dbfb   prodrigestivill/postgres-backup-local:alpine   "/init.sh"               2               8.19kB    4 months ago   Up 14 hours (healthy)   postgres-backup
+8e0407b19625   brain-search-api-brain-search-api              "uvicorn main:app --…"   0               266kB     4 months ago   Up 14 hours             brain-search-api
+1af189aae2a7   raapmem-api:latest                             "docker-entrypoint.s…"   0               4.1kB     4 months ago   Up 14 hours (healthy)   raapmem-api
+133052b4843e   minio/minio                                    "/usr/bin/docker-ent…"   0               24.6kB    4 months ago   Up 14 hours             minio
+99f9e7298ee5   pgvector/pgvector:pg16                         "docker-entrypoint.s…"   1               32.8kB    4 months ago   Up 14 hours (healthy)   brain-postgres
+cfb43b4956c9   brain-chat-api-brain-chat-ui                   "docker-entrypoint.s…"   0               4.1kB     4 months ago   Up 14 hours (healthy)   brain-chat-ui
+203f5fcbd50d   amir20/dozzle:latest                           "/dozzle"                0               12.3kB    4 months ago   Up 14 hours             dozzle
+6f9bff29eaeb   brain-chat-api-brain-chat-api                  "uvicorn main:app --…"   0               283kB     4 months ago   Up 14 hours (healthy)   brain-chat-api
+60b7af318471   brain-mcp:latest                               "docker-entrypoint.s…"   0               4.1kB     5 months ago   Up 14 hours             brain-mcp
+9d98e744daa2   louislam/uptime-kuma:latest                    "/usr/bin/dumb-init …"   1               262kB     5 months ago   Up 14 hours (healthy)   uptime-kuma
+6c5e748bfd10   ghcr.io/czlonkowski/n8n-mcp:latest             "/usr/local/bin/dock…"   1               24.6kB    5 months ago   Up 14 hours (healthy)   n8n-mcp
+79801edb6d3d   portainer/portainer-ce:latest                  "/portainer"             0               16.4kB    5 months ago   Up 14 hours             portainer
+515fb99fea92   jc21/nginx-proxy-manager:latest                "/init"                  0               5.08MB    5 months ago   Up 14 hours             npm
+
+Local Volumes space usage:
+
+VOLUME NAME                                                        LINKS     SIZE
+beanzneez-v2_pgdata                                                1         48.09MB
+f03ec7c527cf8cd4fd919c5407111404f2cde68a13f731579f84f2633221624b   0         0B
+paperclip_pgdata                                                   0         90.34MB
+0309c719b5c11a64d9e73323fdecc207fe8fad8c5ccc0e89e63d1056704a6cb4   1         72.98MB
+75e2c5bc6f68f016ea544b11c30c44011ee498f928a84fb7f54c212d8aaf2014   0         0B
+8bae52e4958df92e54d58ce1e2aeb6b20468d41a0ab343b2ac3fffb00ca00684   1         1B
+brain-pgdata                                                       1         1.148GB
+docker-compose_uptime-kuma-data                                    1         79.17MB
+smw-cloud_smw_redis_data                                           0         6.686kB
+beanzneez-v2_node_modules                                          0         948.5MB
+minibench_pgdata                                                   1         48.03MB
+n8n-mcp_n8n-mcp-data                                               1         71.7MB
+n8n_data                                                           1         29.59MB
+n8n_postgres_data                                                  1         354.2MB
+seo-health-report-system_postgres_data                             0         47.99MB
+trading-platform_trading-data                                      1         0B
+archon_db_data                                                     0         52.9MB
+docker-compose_pg-backups                                          1         7.492GB
+paperclip_paperclip-data                                           0         16.07GB
+smw-cloud_smw_postgres_data                                        0         49.89MB
+
+Build cache usage: 0B
+
+CACHE ID   CACHE TYPE   SIZE      CREATED   LAST USED   USAGE     SHARED
+
+===== RESOURCES =====
+8
+               total        used        free      shared  buff/cache   available
+Mem:            46Gi       2.8Gi        41Gi       114Mi       3.8Gi        44Gi
+Swap:          8.0Gi          0B       8.0Gi
+Filesystem                        Type  Size  Used Avail Use% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4  194G   65G  121G  35% /
+/dev/mapper/ubuntu--vg-ubuntu--lv ext4  194G   65G  121G  35% /
+Filesystem                        Inodes IUsed IFree IUse% Mounted on
+/dev/mapper/ubuntu--vg-ubuntu--lv    13M  1.1M   12M    9% /
+/dev/mapper/ubuntu--vg-ubuntu--lv    13M  1.1M   12M    9% /
+
+===== LISTENERS =====
+Netid State  Recv-Q Send-Q                       Local Address:Port  Peer Address:PortProcess                                    
+udp   UNCONN 0      2880                               0.0.0.0:41641      0.0.0.0:*                                              
+udp   UNCONN 0      0                               127.0.0.54:53         0.0.0.0:*                                              
+udp   UNCONN 0      0                            127.0.0.53%lo:53         0.0.0.0:*                                              
+udp   UNCONN 0      5760                                  [::]:41641         [::]:*                                              
+udp   UNCONN 0      0                                        *:43195            *:*                                              
+udp   UNCONN 0      0                                        *:21116            *:*                                              
+udp   UNCONN 0      0      [fe80::be24:11ff:fe6b:f74d]%enp6s18:546           [::]:*                                              
+tcp   LISTEN 0      2048                               0.0.0.0:8200       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:8898       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                          100.97.87.28:9443       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:443        0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:80         0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:81         0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:22         0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3034       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3035       0.0.0.0:*                                              
+tcp   LISTEN 0      511                                0.0.0.0:3036       0.0.0.0:*    users:(("next-server (v1",pid=4470,fd=21))
+tcp   LISTEN 0      4096                               0.0.0.0:3070       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3071       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3045       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3050       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3055       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:3001       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:5434       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:5438       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:5437       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:5678       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                               0.0.0.0:8055       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                          100.97.87.28:61401      0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:8000       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:8101       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:8100       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:5436       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                            127.0.0.54:53         0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:9001       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:9000       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:8889       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                         127.0.0.53%lo:53         0.0.0.0:*                                              
+tcp   LISTEN 0      4096                             127.0.0.1:9443       0.0.0.0:*                                              
+tcp   LISTEN 0      4096                                  [::]:8898          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:443           [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:80            [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:81            [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:22            [::]:*                                              
+tcp   LISTEN 0      4096           [fd7a:115c:a1e0::6e01:578c]:47037         [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3034          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3035          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3070          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3071          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3045          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3050          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3055          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:3001          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:5434          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:5438          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:5437          [::]:*                                              
+tcp   LISTEN 0      4096                                  [::]:8055          [::]:*                                              
+tcp   LISTEN 0      4096           [fd7a:115c:a1e0::6e01:578c]:9443          [::]:*                                              
+tcp   LISTEN 0      128                                      *:21115            *:*                                              
+tcp   LISTEN 0      128                                      *:21118            *:*                                              
+tcp   LISTEN 0      128                                      *:21119            *:*                                              
+tcp   LISTEN 0      128                                      *:21116            *:*                                              
+tcp   LISTEN 0      128                                      *:21117            *:*                                              
+
+===== DOCKER_SERVICE =====
+enabled
+active
+
+===== DIRECTORY_CONVENTIONS =====
+-- /opt
+total 112
+drwxr-xr-x 28 dvm  dvm  4096 Apr 29 02:30 .
+drwxr-xr-x 23 root root 4096 Feb  2 16:53 ..
+drwxrwxr-x  5 dvm  dvm  4096 Mar 20 02:37 apps
+drwxrwxr-x 12 dvm  dvm  4096 Apr 29 13:41 archon
+drwxrwxr-x 19 dvm  dvm  4096 Mar 19 11:28 ccplate
+drwxrwxr-x  8 dvm  dvm  4096 Jan 28 20:49 config-backups
+drwx--x--x  4 dvm  dvm  4096 Jan 25 22:49 containerd
+drwxr-xr-x  3 root root 4096 Apr 29 02:30 copilot-cost-calculator
+drwxrwxr-x  3 dvm  dvm  4096 Jan 29 17:20 damien
+drwxrwxr-x 18 dvm  dvm  4096 Mar 19 11:28 driveros
+drwxr-xr-x  4 root root 4096 Jan 25 23:10 duplicati
+drwxrwxr-x  3 dvm  dvm  4096 Jan 28 22:34 embeddings
+drwxrwxr-x  2 dvm  dvm  4096 Jan 30 22:02 file-drop
+drwxrwxr-x  2 dvm  dvm  4096 Jan 31 00:31 filedrop-api
+drwxrwxr-x  5 dvm  dvm  4096 Mar 19 11:28 filedrop-ui
+drwxr-xr-x  3 root root 4096 Jan 25 23:11 homepage
+drwxrwxr-x  3 dvm  dvm  4096 Jan 28 14:54 minio
+drwxr-xr-x  4 dvm  dvm  4096 Jan 29 05:14 n8n
+drwxr-xr-x  4 dvm  dvm  4096 Jan 25 23:01 nginx-proxy-manager
+drwxrwxr-x  6 dvm  dvm  4096 Jan 27 20:44 planka
+drwxr-xr-x  8 dvm  dvm  4096 Jan 28 22:34 portainer
+drwx------ 19  999   70 4096 Feb  1 18:00 postgres
+drwxr-xr-x  3 root root 4096 Jan 29 17:20 remi
+drwx------  4 dvm  dvm  4096 Mar 17 04:36 second-brain
+drwxr-xr-x  3 dvm  dvm  4096 Apr 23 14:55 smw-cloud
+drwxrwxr-x  2 dvm  dvm  4096 Jan 28 14:57 team
+drwxrwxr-x 18 dvm  dvm  4096 Feb 27 04:12 team-command-center
+drwxr-xr-x  3 root root 4096 Jan 29 17:20 topg
+-- /srv
+total 12
+drwxr-xr-x  3 root root 4096 Jul  6 00:16 .
+drwxr-xr-x 23 root root 4096 Feb  2 16:53 ..
+drwxr-xr-x  8 root root 4096 Jul  6 00:16 vault
+-- /var/lib/docker
+-- /home
+total 16
+drwxr-xr-x  4 root root 4096 Jan 29 17:20 .
+drwxr-xr-x 23 root root 4096 Feb  2 16:53 ..
+drwxr-xr-x  4 root root 4096 Jan 30 13:20 cbi
+drwxr-x--- 60 dvm  dvm  4096 Apr 30 05:03 dvm
+
+===== BACKUP_INDICATORS =====
+dpkg-db-backup.service                                                        static          -
+dpkg-db-backup.timer                                                          enabled         enabled
+0 1 * * 0 python3 /home/dvm/scripts/generate-business-profile.py >> /home/dvm/logs/profile-generator-cron.log 2>&1
+0 2 * * * /home/dvm/projects/n8n-workflows/export-workflows.sh >> /home/dvm/projects/n8n-workflows/export.log 2>&1
+0 2 * * * /home/dvm/scripts/backup-supabase.sh >> /home/dvm/logs/backup.log 2>&1
+0 2 * * * /opt/config-backups/backup.sh >> /var/log/config-backup.log 2>&1
+0 3 * * * python3 /home/dvm/scripts/freshness-scan.py >> /home/dvm/logs/freshness-scan.log 2>&1
+0 4 * * * /home/dvm/docker-cleanup.sh >> /home/dvm/docker-cleanup.log 2>&1
+0 6 * * 1 cd /home/dvm/reference/system-prompts/CL4R1T4S && git pull >> /home/dvm/logs/cl4r1t4s-pull.log 2>&1
+0 6 * * * /opt/embeddings/sync-and-embed.sh
+0 * * * * cd /home/dvm/data-collectors && python3 deribit_oi_collector.py >> /home/dvm/data-collectors/collector.log 2>&1
+0 * * * * docker exec brain-postgres psql -U postgres -d brains -c "SELECT cleanup_expired_tokens();" >/dev/null 2>&1
+15 * * * * cd /home/dvm/data-collectors && python3 coinglass_scraper.py >> /home/dvm/data-collectors/scraper.log 2>&1
+*/5 * * * * /home/dvm/push-context-all.sh >> /tmp/context-push.log 2>&1
+0 */6 * * * /usr/bin/python3 /home/dvm/youtube-rss-fetch.py >> /tmp/youtube-rss.log 2>&1
+0 3 * * 0 /home/dvm/scripts/disk-cleanup.sh >> /home/dvm/scripts/disk-cleanup.log 2>&1
+/mnt:
+total 12
+drwxr-xr-x  3 root root 4096 May 12 16:59 .
+drwxr-xr-x 23 root root 4096 Feb  2 16:53 ..
+drwxr-xr-x  4 root root 4096 May 12 16:59 truenas
+
+===== RECENT_DOCKER_LOG_GROWTH =====
+Archived and active journals take up 2.8G in the file system.
+du: cannot read directory '/var/lib/docker': Permission denied
+4.0K	/var/lib/docker

@@ -8,7 +8,8 @@ Research here is the synthesized result. Original working research lives in dedi
 
 ## Contents
 
-* [Fable 5 Prompting Patterns](/research/fable5-prompting-patterns.md) — 6 habits, when to use, loop engineering, cost lessons
+* [AI Developer Workflows and Fable Prompting Patterns](/research/fable5-prompting-patterns.md) — 6 habits, workflow contracts, deterministic gates, cost lessons
+* [Forget Loop Engineering — AI Developer Workflows](/research/indydevdan-ai-developer-workflows.md) — source-backed operating-model correction and workflow-factory roadmap
 
 ## How Research Flows
 

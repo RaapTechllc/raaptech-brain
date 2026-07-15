@@ -1,0 +1,9 @@
+SOURCE: architecture/cost-policy.md#hard-cap
+SCORE: 16 | TOKENS: ~34
+------------------------------------------------------------
+## Hard Cap
+
+- **$50/day** across all providers
+- Enforced at the engine level (not advisory)
+- Kill switch triggers when cap is reached
+------------------------------------------------------------

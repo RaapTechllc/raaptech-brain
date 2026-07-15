@@ -1,0 +1,19 @@
+=== mine-pass artifacts ===
+EXISTS: docs/superpowers/specs/2026-07-09-mine-pass-design.md
+EXISTS: docs/adr/0001-mine-pass-gate-and-audit.md
+EXISTS: tickets.md
+MISSING: docs/mine/README.md
+MISSING: docs/mine/candidates.md
+MISSING: docs/mine/conflicts.md
+MISSING: docs/mine/pass-log.md
+EXISTS: CONTEXT.md
+=== mine skill search ===
+C:\Users\Kyle\CC\raaptech-brain\.scratch\mine-pass
+C:\Users\Kyle\CC\raaptech-brain\.scratch\mine-pass\issues\01-mine-staging-scaffold.md
+C:\Users\Kyle\CC\raaptech-brain\.scratch\mine-pass\issues\02-hermes-miner-thin-proof.md
+C:\Users\Kyle\CC\raaptech-brain\.scratch\mine-pass\issues\04-mine-pass-skill-hermes.md
+C:\Users\Kyle\CC\raaptech-brain\.scratch\mine-pass\issues\06-vault-miner-widen.md
+C:\Users\Kyle\CC\raaptech-brain\docs\adr\0001-mine-pass-gate-and-audit.md
+C:\Users\Kyle\CC\raaptech-brain\docs\superpowers\specs\2026-07-09-mine-pass-design.md
+=== gitignore mine ===
+NO docs/mine gitignore rule

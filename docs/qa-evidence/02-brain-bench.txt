@@ -1,0 +1,14 @@
+| question | hit | file | latency ms | evidence tokens | naive tokens |
+|---|---|---|---|---|---|
+| What is the daily cost cap across all providers? | PASS | architecture/cost-policy.md#hard-cap | 4.5 | 34 | 247 |
+| Which model serves as the orchestrator in model routing? | PASS | architecture/model-routing.md | 3.4 | 339 | 410 |
+| What is the Tailscale IP for TrueNAS? | PASS | fleet/tailscale-map.md#ip-map | 3.0 | 174 | 534 |
+| What is the disaster recovery order for the fleet? | PASS | fleet/backups.md#recovery-order | 3.4 | 53 | 442 |
+| What runs first in the daily morning ops stack? | PASS | fleet/services.md#daily-ops-stack | 4.5 | 95 | 432 |
+| How does contract-first spawning order the agents? | PASS | skills/cole-medin-patterns.md#5-contract-first-spawning | 4.2 | 69 | 1047 |
+| Where does cron output go from a TUI session in the messaging gateways? | PASS | integrations/messaging-gateways.md#cron-delivery | 5.0 | 140 | 396 |
+| Where are the Google OAuth credentials stored? | PASS | integrations/google-oauth-bridge.md | 3.9 | 570 | 641 |
+| What is the next sprint session to run? | PASS | sessions/sprint-tracker.md#next-action | 4.1 | 78 | 451 |
+| What is the rot period for API keys? | PASS | architecture/rot-maintenance.md#rot-rates | 3.2 | 62 | 242 |
+
+10/10 hit ΓÇö evidence 1614 tokens vs naive 4842 tokens (67% saved)

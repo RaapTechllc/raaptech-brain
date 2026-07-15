@@ -1,0 +1,8 @@
+RaapTech Vault Bridge ù Status
+========================================
+Vault path:     C:\Users\Kyle\.openclaw\workspace\RaapTech-Vault
+Exists:         yes
+Obsidian vault: yes
+Markdown notes: 106
+Git remote:     https://github.com/RaapTechllc/raaptech-vault.git
+Brain root:     C:\Users\Kyle\CC\raaptech-brain

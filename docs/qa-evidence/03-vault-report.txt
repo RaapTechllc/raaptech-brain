@@ -1,0 +1,49 @@
+RaapTech Vault Bridge ù Status
+========================================
+Vault path:     C:\Users\Kyle\.openclaw\workspace\RaapTech-Vault
+Exists:         yes
+Obsidian vault: yes
+Markdown notes: 106
+Git remote:     https://github.com/RaapTechllc/raaptech-vault.git
+Brain root:     C:\Users\Kyle\CC\raaptech-brain
+
+Domain mapping
+========================================
+  OK  architecture   -> 20-Areas/Infrastructure (6 notes)
+  OK  architecture   -> 30-Resources/Tech-Reference (1 notes)
+  OK  fleet          -> 20-Areas/Fleet-Ops (15 notes)
+  OK  fleet          -> 60-Fleet (19 notes)
+  OK  business       -> 20-Areas/Business (1 notes)
+  OK  business       -> 20-Areas/Trading (9 notes)
+  OK  integrations   -> 20-Areas/Integrations (1 notes)
+  OK  skills         -> 30-Resources/Brains (2 notes)
+  OK  skills         -> 30-Resources/Dynamous (1 notes)
+  OK  sessions       -> 50-Daily (9 notes)
+  OK  research       -> 30-Resources/Market-Intel (1 notes)
+  OK  research       -> 00-Inbox (0 notes)
+  OK  references     -> 30-Resources/Tech-Reference (1 notes)
+  OK  references     -> 40-Archive (0 notes)
+
+Brain concepts without obvious vault notes (informational)
+========================================
+  NO VAULT MATCH  .scratch\mine-pass\issues\01-mine-staging-scaffold.md (searched: 'staging')
+  NO VAULT MATCH  .scratch\mine-pass\issues\02-hermes-miner-thin-proof.md (searched: 'hermes')
+  NO VAULT MATCH  .scratch\mine-pass\issues\04-mine-pass-skill-hermes.md (searched: 'skill')
+  NO VAULT MATCH  .scratch\mine-pass\issues\05-hermes-audit-handoff.md (searched: 'hermes')
+  NO VAULT MATCH  architecture\mcp-servers.md (searched: 'servers')
+  NO VAULT MATCH  architecture\rot-maintenance.md (searched: 'maintenance')
+  NO VAULT MATCH  assessments\2026-07-14-codex-project-factory\01-CODEX-PROJECT-FACTORY-ARCHITECTURE-DECISION.md (searched: 'codex')
+  NO VAULT MATCH  assessments\2026-07-14-codex-project-factory\02-CODEX-PROJECT-FACTORY-DEPLOYMENT-READINESS.md (searched: 'codex')
+  NO VAULT MATCH  assessments\2026-07-14-codex-project-factory\04-CODEX-PROJECT-FACTORY-PROOF-RUN-PLAN.md (searched: 'codex')
+  NO VAULT MATCH  assessments\2026-07-14-codex-project-factory\05-EVIDENCE-INDEX.md (searched: 'evidence')
+  NO VAULT MATCH  assessments\2026-07-14-rde-vm-first-pilot\RDE-VM-FIRST-PILOT-RECEIPT.md (searched: 'first')
+  NO VAULT MATCH  business\client-work.md (searched: 'client')
+  NO VAULT MATCH  business\morning-ops.md (searched: 'morning')
+  NO VAULT MATCH  business\revenue-pricing.md (searched: 'revenue')
+  NO VAULT MATCH  business\toc-analysis.md (searched: 'theory')
+  NO VAULT MATCH  catalog.md (searched: 'catalog')
+  NO VAULT MATCH  CLAUDE.md (searched: 'claude')
+  NO VAULT MATCH  docs\plans\fable-final-session-prompt.md (searched: 'fable')
+  NO VAULT MATCH  docs\plans\next-steps-plan.md (searched: 'raaptech')
+  NO VAULT MATCH  docs\superpowers\specs\2026-07-07-second-brain-retrieval-design.md (searched: 'deterministic')
+  ... and 20 more
