@@ -31,11 +31,13 @@ Work the **frontier**: any ticket whose blockers are all done. For this chain th
 
 **Blocked by:** Mine staging scaffold
 
-- [ ] Miner allowlist is Hermes memories only for thin proof
-- [ ] Candidates land in staging in the shared contract shape (including proposed domain)
-- [ ] Secrets are never proposed as candidates
-- [ ] Archives/backups paths are not read
-- [ ] Domain files and catalogue are unchanged by the Miner alone
+**Status:** Done (2026-07-15)
+
+- [x] Miner allowlist is Hermes memories only for thin proof
+- [x] Candidates land in staging in the shared contract shape (including proposed domain)
+- [x] Secrets are never proposed as candidates
+- [x] Archives/backups paths are not read
+- [x] Domain files and catalogue are unchanged by the Miner alone
 
 ## Gate agent
 
