@@ -35,7 +35,7 @@ DOMAINS = (
 SECRET_PATTERNS = tuple(
     re.compile(pattern, re.IGNORECASE)
     for pattern in (
-        r"\b(api[_-]?key|secret(?:[_-]?key)?|token|access[_-]?token|refresh[_-]?token|client[_-]?secret|private[_-]?key|password|passwd|pwd|connection[_-]?string|database[_-]?url)\b\s*[:=]\s*\S+",
+        r'''(?<![A-Za-z0-9])["']?[A-Za-z0-9_-]*(api[_-]?key|secret(?:[_-]?key)?|token|client[_-]?secret|private[_-]?key|password|passwd|pwd|connection[_-]?string|database[_-]?url)["']?\s*[:=]\s*["']?\S+''',
         r"\b(postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqps?)://[^\s:/]+:[^\s@]+@",
         r"\bBearer\s+[A-Za-z0-9\-._~+/]+=*",
         r"\bsk-[A-Za-z0-9]{10,}\b",
@@ -84,11 +84,21 @@ def configured_memories_root() -> Path:
             if local_app_data
             else Path.home() / "AppData" / "Local" / "hermes"
         )
-    return (hermes_home / "memories").resolve()
+    return Path(os.path.abspath(hermes_home / "memories"))
 
 
 def same_path(left: Path, right: Path) -> bool:
     return os.path.normcase(str(left.resolve())) == os.path.normcase(str(right.resolve()))
+
+
+def path_has_symlink(path: Path) -> bool:
+    current = Path(path.anchor)
+    start = 1 if path.anchor else 0
+    for part in path.parts[start:]:
+        current /= part
+        if current.is_symlink():
+            return True
+    return False
 
 
 def candidate_limit(raw: str) -> int:
@@ -133,10 +143,20 @@ def propose_domain(text: str) -> str:
 
 
 def allowlisted_sources(memories_root: Path) -> list[Path]:
+    if path_has_symlink(memories_root):
+        return []
     if not memories_root.is_dir():
         return []
-    forbidden = {"archive", "backup", "_agent-md-backups", "openclaw-agents"}
-    if forbidden.intersection(part.lower() for part in memories_root.parts):
+    resolved_root = memories_root.resolve()
+    path_parts = {
+        part.lower() for part in (*memories_root.parts, *resolved_root.parts)
+    }
+    if any(
+        "archive" in part
+        or "backup" in part
+        or part in {"_agent-md-backups", "openclaw-agents"}
+        for part in path_parts
+    ):
         return []
 
     sources: list[Path] = []
@@ -144,7 +164,7 @@ def allowlisted_sources(memories_root: Path) -> list[Path]:
         if source.is_symlink():
             continue
         resolved = source.resolve()
-        if resolved.parent != memories_root or not resolved.is_file():
+        if resolved.parent != resolved_root or not resolved.is_file():
             continue
         lowered = source.name.lower()
         if any(token in lowered for token in ("backup", "archive", "pre-")):

@@ -44,8 +44,13 @@ class HermesMinerCliTests(unittest.TestCase):
         self.addCleanup(CANDIDATES.unlink, missing_ok=True)
 
     def run_miner(self, *args: str) -> subprocess.CompletedProcess[str]:
+        return self.run_miner_with_home(self.hermes_home, *args)
+
+    def run_miner_with_home(
+        self, hermes_home: Path, *args: str
+    ) -> subprocess.CompletedProcess[str]:
         env = os.environ.copy()
-        env["HERMES_HOME"] = str(self.hermes_home)
+        env["HERMES_HOME"] = str(hermes_home)
         return subprocess.run(
             [sys.executable, str(SCRIPT), *args],
             cwd=ROOT,
@@ -108,6 +113,22 @@ class HermesMinerCliTests(unittest.TestCase):
         self.assertNotIn("synthetic-password", result.stdout)
         self.assertIn("secret blocks skipped: 3", result.stdout)
 
+    def test_rejects_provider_prefixed_and_json_credentials(self) -> None:
+        self.write_memories(
+            "OPENAI_API_KEY=synthetic-prefixed-key-that-must-not-be-staged",
+            "CUSTOM_PROVIDER_TOKEN=synthetic-prefixed-token-that-must-not-be-staged",
+            '\"token\": \"synthetic-json-token-that-must-not-be-staged\"',
+            "The deterministic catalogue remains the durable retrieval index.",
+        )
+
+        result = self.run_miner("--dry-run")
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("The deterministic catalogue", result.stdout)
+        self.assertNotIn("synthetic-prefixed", result.stdout)
+        self.assertNotIn("synthetic-json-token", result.stdout)
+        self.assertIn("secret blocks skipped: 3", result.stdout)
+
     def test_does_not_censor_non_secret_persona_words(self) -> None:
         self.write_memories(
             "Hormozi-style offer analysis is part of the current business research workflow."
@@ -133,6 +154,40 @@ class HermesMinerCliTests(unittest.TestCase):
 
         self.assertEqual(1, result.returncode)
         self.assertNotIn("symlink target", result.stdout)
+
+    def test_rejects_variant_backup_roots(self) -> None:
+        backup_home = Path(self.tempdir.name) / "backup-2026" / "hermes"
+        backup_memories = backup_home / "memories"
+        backup_memories.mkdir(parents=True)
+        (backup_memories / "MEMORY.md").write_text(
+            "This backup-root claim must not be mined.", encoding="utf-8"
+        )
+
+        result = self.run_miner_with_home(backup_home, "--dry-run")
+
+        self.assertEqual(1, result.returncode)
+        self.assertNotIn("backup-root claim", result.stdout)
+
+    def test_rejects_a_symlinked_memories_root(self) -> None:
+        real_home = Path(self.tempdir.name) / "real-hermes"
+        real_memories = real_home / "memories"
+        real_memories.mkdir(parents=True)
+        (real_memories / "MEMORY.md").write_text(
+            "This symlinked-root claim must not be mined.", encoding="utf-8"
+        )
+        linked_home = Path(self.tempdir.name) / "linked-hermes"
+        linked_home.mkdir()
+        try:
+            (linked_home / "memories").symlink_to(
+                real_memories, target_is_directory=True
+            )
+        except OSError as exc:
+            self.skipTest(f"directory symlinks unavailable on this system: {exc}")
+
+        result = self.run_miner_with_home(linked_home, "--dry-run")
+
+        self.assertEqual(1, result.returncode)
+        self.assertNotIn("symlinked-root claim", result.stdout)
 
     def test_refuses_output_outside_the_mine_staging_file(self) -> None:
         self.write_memories(
