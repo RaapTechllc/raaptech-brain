@@ -35,27 +35,17 @@ DOMAINS = (
 SECRET_PATTERNS = tuple(
     re.compile(pattern, re.IGNORECASE)
     for pattern in (
-        r"\b(api[_-]?key|secret[_-]?key|access[_-]?token|refresh[_-]?token)\b\s*[:=]",
+        r"\b(api[_-]?key|secret(?:[_-]?key)?|token|access[_-]?token|refresh[_-]?token|client[_-]?secret|private[_-]?key|password|passwd|pwd|connection[_-]?string|database[_-]?url)\b\s*[:=]\s*\S+",
+        r"\b(postgres(?:ql)?|mysql|mongodb(?:\+srv)?|redis|amqps?)://[^\s:/]+:[^\s@]+@",
         r"\bBearer\s+[A-Za-z0-9\-._~+/]+=*",
         r"\bsk-[A-Za-z0-9]{10,}\b",
         r"\bxai-[A-Za-z0-9]{10,}\b",
         r"\bgh[pousr]_[A-Za-z0-9]{20,}\b",
         r"\bgithub_pat_[A-Za-z0-9_]{20,}\b",
         r"\bAIza[0-9A-Za-z_-]{20,}\b",
-        r"\bpassword\s*[:=]\s*\S+",
-        r"\bpw\s*[:=]\s*\S+",
         r"-----BEGIN (RSA |OPENSSH |EC )?PRIVATE KEY-----",
         r"\bAKIA[0-9A-Z]{16}\b",
-    )
-)
-
-SOFT_SKIP_PATTERNS = tuple(
-    re.compile(pattern, re.IGNORECASE)
-    for pattern in (
-        r"\bHormozi\b",
-        r"\bhates filler\b",
-        r"\bno-nonsense\b.*\bStyle:",
-        r"^Style:\s*",
+        r"\beyJ[A-Za-z0-9_-]+\.eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\b",
     )
 )
 
@@ -115,10 +105,6 @@ def is_secret(text: str) -> bool:
     return any(pattern.search(text) for pattern in SECRET_PATTERNS)
 
 
-def is_soft_skip(text: str) -> bool:
-    return any(pattern.search(text) for pattern in SOFT_SKIP_PATTERNS)
-
-
 def parse_blocks(text: str) -> list[str]:
     separator = "§" if "§" in text else None
     raw_blocks = text.split(separator) if separator else re.split(r"\n\s*\n", text)
@@ -155,6 +141,8 @@ def allowlisted_sources(memories_root: Path) -> list[Path]:
 
     sources: list[Path] = []
     for source in sorted(memories_root.glob("*.md")):
+        if source.is_symlink():
+            continue
         resolved = source.resolve()
         if resolved.parent != memories_root or not resolved.is_file():
             continue
@@ -171,8 +159,6 @@ def mine_source(path: Path) -> tuple[list[Candidate], int]:
     for block in parse_blocks(path.read_text(encoding="utf-8")):
         if is_secret(block):
             secret_blocks += 1
-            continue
-        if is_soft_skip(block):
             continue
         candidates.append(
             Candidate(

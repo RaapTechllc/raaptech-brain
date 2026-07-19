@@ -91,6 +91,49 @@ class HermesMinerCliTests(unittest.TestCase):
         self.assertNotIn("synthetic-secret", result.stdout)
         self.assertIn("secret blocks skipped: 1", result.stdout)
 
+    def test_rejects_generic_credentials_and_connection_strings(self) -> None:
+        self.write_memories(
+            "TOKEN=synthetic-token-value-that-must-not-be-staged",
+            "CLIENT_SECRET=synthetic-client-secret-that-must-not-be-staged",
+            "postgresql://brain_user:synthetic-password@localhost/brain",
+            "The deterministic catalogue remains the durable retrieval index.",
+        )
+
+        result = self.run_miner("--dry-run")
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("The deterministic catalogue", result.stdout)
+        self.assertNotIn("synthetic-token", result.stdout)
+        self.assertNotIn("synthetic-client-secret", result.stdout)
+        self.assertNotIn("synthetic-password", result.stdout)
+        self.assertIn("secret blocks skipped: 3", result.stdout)
+
+    def test_does_not_censor_non_secret_persona_words(self) -> None:
+        self.write_memories(
+            "Hormozi-style offer analysis is part of the current business research workflow."
+        )
+
+        result = self.run_miner("--dry-run")
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("Hormozi-style offer analysis", result.stdout)
+
+    def test_excludes_symlinked_markdown_sources(self) -> None:
+        target = self.memories / "linked-source.txt"
+        target.write_text(
+            "This same-directory symlink target must not be mined.", encoding="utf-8"
+        )
+        link = self.memories / "linked.md"
+        try:
+            link.symlink_to(target)
+        except OSError as exc:
+            self.skipTest(f"symlinks unavailable on this system: {exc}")
+
+        result = self.run_miner("--dry-run")
+
+        self.assertEqual(1, result.returncode)
+        self.assertNotIn("symlink target", result.stdout)
+
     def test_refuses_output_outside_the_mine_staging_file(self) -> None:
         self.write_memories(
             "The Docker VM is the durable workflow plane for internal automation."

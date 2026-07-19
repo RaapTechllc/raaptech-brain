@@ -24,8 +24,10 @@ durable save.
 ## Candidate contract
 
 Each candidate records a claim, source path, short evidence excerpt, proposed
-domain, miner identity, Gate decision, and Gate reason. Secrets are rejected
-before staging. A candidate is not trusted knowledge.
+domain, miner identity, Gate decision, and Gate reason. Blocks matching
+credential assignments, connection strings, provider-token formats, private
+keys, or JWTs are conservatively rejected before staging. A candidate is not
+trusted knowledge.
 
 ## Boundaries
 
