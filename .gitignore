@@ -32,3 +32,8 @@ node_modules/
 # Temp
 *.tmp
 *.log
+
+# Ephemeral mine-pass output
+docs/mine/candidates.md
+docs/mine/conflicts.md
+docs/mine/pass-log.md
