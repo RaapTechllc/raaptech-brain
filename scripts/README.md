@@ -10,8 +10,8 @@ timestamp: 2026-07-07T12:00:00Z
 
 All scripts run from the repo root with `python scripts/<script>.py`. Only
 `sync-google-drive.py`, `okf-validate.py`, and `vault-bridge.py` need
-third-party packages (see `requirements.txt` at repo root); `brain.py` is
-stdlib-only.
+third-party packages (see `requirements.txt` at repo root); `brain.py` and
+`hermes_miner.py` are stdlib-only.
 
 ## brain.py
 
@@ -62,6 +62,21 @@ python scripts/vault-bridge.py --search <keyword>
 python scripts/vault-bridge.py --verify
 python scripts/vault-bridge.py --report
 ```
+
+## hermes_miner.py
+
+Reads only the configured Hermes memory root and emits at most 20 candidate
+Insights into the gitignored mine staging queue. It never promotes knowledge.
+
+```bash
+python scripts/hermes_miner.py
+python scripts/hermes_miner.py --dry-run
+python scripts/hermes_miner.py --max 10
+```
+
+Set `HERMES_HOME` only when Hermes itself uses a non-default home. `--memories`
+must resolve to that configured root, and `--out` cannot redirect output away
+from `docs/mine/candidates.md`.
 
 ## bench-questions.json
 
