@@ -150,13 +150,17 @@ class HermesMinerCliTests(unittest.TestCase):
 
     def test_does_not_censor_non_secret_persona_words(self) -> None:
         self.write_memories(
-            "Hormozi-style offer analysis is part of the current business research workflow."
+            "Hormozi-style offer analysis is part of the current business research workflow.",
+            "See sk-customer-support-playbook for ordinary operating guidance.",
+            "The sk-long-form-documentation label is not a credential.",
         )
 
         result = self.run_miner("--dry-run")
 
         self.assertEqual(0, result.returncode, result.stderr)
         self.assertIn("Hormozi-style offer analysis", result.stdout)
+        self.assertIn("sk-customer-support-playbook", result.stdout)
+        self.assertIn("sk-long-form-documentation", result.stdout)
 
     def test_excludes_symlinked_markdown_sources(self) -> None:
         target = self.memories / "linked-source.txt"
