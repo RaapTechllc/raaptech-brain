@@ -129,6 +129,25 @@ class HermesMinerCliTests(unittest.TestCase):
         self.assertNotIn("synthetic-json-token", result.stdout)
         self.assertIn("secret blocks skipped: 3", result.stdout)
 
+    def test_rejects_modern_provider_token_formats(self) -> None:
+        self.write_memories(
+            "sk-proj-synthetic_openai_project_token_that_must_not_be_staged",
+            "sk-ant-api03-synthetic_anthropic_token_that_must_not_be_staged",
+            "xoxb-123456789012-synthetic-slack-token-that-must-not-be-staged",
+            "123456789:syntheticTelegramBotTokenThatMustNotBeStaged123",
+            "The deterministic catalogue remains the durable retrieval index.",
+        )
+
+        result = self.run_miner("--dry-run")
+
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertIn("The deterministic catalogue", result.stdout)
+        self.assertNotIn("synthetic_openai", result.stdout)
+        self.assertNotIn("synthetic_anthropic", result.stdout)
+        self.assertNotIn("synthetic-slack", result.stdout)
+        self.assertNotIn("syntheticTelegram", result.stdout)
+        self.assertIn("secret blocks skipped: 4", result.stdout)
+
     def test_does_not_censor_non_secret_persona_words(self) -> None:
         self.write_memories(
             "Hormozi-style offer analysis is part of the current business research workflow."
